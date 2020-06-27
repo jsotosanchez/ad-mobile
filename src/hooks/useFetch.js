@@ -27,7 +27,6 @@ export const useGet = (url, refresh) => {
     return () => {};
   }, [url, refresh]);
 
-  console.log(data);
   return { data, status };
 };
 
