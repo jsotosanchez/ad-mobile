@@ -29,10 +29,11 @@ const LogInStackNavigation = createStackNavigator();
 export default function Navigation() {
   const context = useContext(SessionContext);
   const authorized = context.isAuthorized();
+  const isMedico = context.isMedico();
   return (
     <>
       <NavigationContainer theme={MyTheme}>
-        {authorized ? <AuthorizedContent /> : <UnauthorizedContent />}
+        {authorized ? <AuthorizedContent isMedico={isMedico} /> : <UnauthorizedContent />}
       </NavigationContainer>
     </>
   );
@@ -50,10 +51,10 @@ function UnauthorizedContent() {
   );
 }
 
-function AuthorizedContent() {
+function AuthorizedContent({ isMedico }) {
   return (
     <Drawer.Navigator>
-      {true ? (
+      {isMedico ? (
         <>
           <Drawer.Screen name="Cargar Agenda" component={CargarAgenda} />
           <Drawer.Screen name="Mi Agenda" component={EditarAgenaStackNavigation} />

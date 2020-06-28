@@ -5,10 +5,13 @@ export const SessionProvider = ({ children }) => {
   const [session, setSession] = useState({ conectado: false });
 
   const sessionContext = useMemo(() => {
-    const authenticate = ({ usuario, roles }) => setSession({ ...session, conectado: true, usuario, roles });
+    const authenticate = ({ usuario, id, roles }) => setSession({ ...session, conectado: true, usuario, id, roles });
     const unAuthorize = () => setSession({ ...session, conectado: false, usuario: null, roles: null });
     const isAuthorized = () => session.conectado;
-    return { authenticate, unAuthorize, isAuthorized };
+    const getUserId = () => session.id;
+    const isMedico = () => (session.roles || []).includes('MEDICO');
+
+    return { authenticate, unAuthorize, isAuthorized, getUserId, isMedico };
   }, [session]);
 
   return (

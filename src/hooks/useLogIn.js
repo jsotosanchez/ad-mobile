@@ -10,9 +10,9 @@ export const useLogIn = () => {
   const unAuthorize = context.unAuthorize;
 
   const logIn = useCallback((documento, password) => {
-    fetchPost(loginUrl, { username: documento, password })
-      .then(({ usuario, roles }) => {
-        authenticate({ usuario, roles });
+    fetchPost(loginUrl, { username: documento.toLowerCase(), password })
+      .then(({ usuario, id, roles }) => {
+        authenticate({ usuario, id, roles });
       })
       .catch(() => {
         Alert.alert('Revise sus datos');
