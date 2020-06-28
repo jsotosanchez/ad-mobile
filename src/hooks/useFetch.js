@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import AuthenticationError from '../AuthenticationError';
+import { Context as SessionContext } from '../contextComponents/SessionContext';
+
 function fetchData(url) {
   return fetch(url, {
     method: 'GET',
@@ -25,14 +27,18 @@ function fetchData(url) {
 export const useGet = (url, refresh) => {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState('LOADING');
+
+  const context = useContext(SessionContext);
+  const unAuthorize = context.unAuthorize;
+
   useEffect(() => {
     const finish = (data) => {
       setData(data);
       setStatus('DONE');
     };
     const cancel = (error) => {
-      console.log('ocurrio un error', error);
       setStatus('ERROR');
+      unAuthorize();
       if (error instanceof AuthenticationError) return error;
     };
     fetchData(url).then(finish, cancel);

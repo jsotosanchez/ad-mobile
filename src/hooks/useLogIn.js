@@ -16,6 +16,7 @@ export const useLogIn = () => {
       })
       .catch(() => {
         Alert.alert('Revise sus datos');
+        unAuthorize();
       });
   }, []);
   return logIn;
