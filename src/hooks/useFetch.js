@@ -1,9 +1,20 @@
 import { useEffect, useState } from 'react';
-
+import AuthenticationError from '../AuthenticationError';
 function fetchData(url) {
   return fetch(url, {
     method: 'GET',
-  }).then((res) => res.json());
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res;
+      } else if (res.status === 401) {
+        throw new AuthenticationError();
+      }
+      throw Error('Error');
+    })
+    .then((res) => {
+      return res.json();
+    });
 }
 
 /**
@@ -22,6 +33,7 @@ export const useGet = (url, refresh) => {
     const cancel = (error) => {
       console.log('ocurrio un error', error);
       setStatus('ERROR');
+      if (error instanceof AuthenticationError) return error;
     };
     fetchData(url).then(finish, cancel);
     return () => {};

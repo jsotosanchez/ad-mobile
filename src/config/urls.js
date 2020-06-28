@@ -5,6 +5,7 @@ const URLS = {
   turnos: `${URLBASE}/turnos`,
   usuarios: `${URLBASE}/usuarios`,
   notificaciones: `${URLBASE}/notificaciones`,
+  login: `${URLBASE}/login`,
 };
 
 // paciente
@@ -85,3 +86,5 @@ export const urlBorrarTurnosPorDia = (id, dia) => {
   return `${URLS.turnos}/medico/${id}/dia/${dia}`;
 };
 // fin editar agenda
+
+export const loginUrl = URLS.login;

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-
+import { useLogIn } from '../hooks/useLogIn';
 import { styles } from '../../styles';
 
 export default function SignIn() {
   const [documento, setDocumento] = useState('');
   const [pass, setPass] = useState('');
 
+  const logIn = useLogIn();
+
   const submit = () => {
-    // const sesion = await logIn(
-    //   `${URLS.logIn}?documento=${documento}&pass=${pass}`,
-    //   {documento, pass},
-    // );
-    Alert.alert('TO DO: Completar');
+    logIn(documento, pass);
   };
 
   return (
