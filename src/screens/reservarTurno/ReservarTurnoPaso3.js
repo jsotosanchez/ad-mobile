@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { styles, pickerStyle } from '../../../styles';
@@ -7,6 +7,7 @@ import { fetchPatch } from '../../http/patch';
 import { urlReservarTurno } from '../../config/urls';
 import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante as maxDate, DATEFORMAT } from '../../helpers/calendar';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
 
 const placeholderHorario = {
   label: 'Selecciona un horario',
@@ -14,6 +15,8 @@ const placeholderHorario = {
 };
 
 export default function ReservarTurnoPaso3({ navigation, route }) {
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
   const { turnoSeleccionado: turnos } = route.params;
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
   const [fechaTurno, setFechaTurno] = useState(moment().format(DATEFORMAT));
@@ -40,7 +43,7 @@ export default function ReservarTurnoPaso3({ navigation, route }) {
   function submit() {
     if (horarioSeleccionado) {
       console.log(horarioSeleccionado);
-      fetchPatch(urlReservarTurno(horarioSeleccionado), { id: 110 }).then((r) => {
+      fetchPatch(urlReservarTurno(horarioSeleccionado), { id: userId }).then((r) => {
         if (r.status === 403) {
           Alert.alert('No puede reservar el turno', r.message);
         }
