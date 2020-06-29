@@ -1,10 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
 import AuthenticationError from '../AuthenticationError';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
+import { Base64 } from 'js-base64';
 
-function fetchData(url) {
+const btoa = Base64.btoa;
+
+function fetchData(url, options) {
   return fetch(url, {
     method: 'GET',
+    headers: {
+      Authorization: 'Basic ' + btoa(options.credentials.usuario + ':' + options.credentials.password),
+    },
   })
     .then((res) => {
       if (res.ok) {
@@ -24,7 +30,7 @@ function fetchData(url) {
  * @param {string} url
  * @return [T] data
  */
-export const useGet = (url, refresh) => {
+export const useGet = (url, refresh, options) => {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState('LOADING');
 
@@ -41,9 +47,9 @@ export const useGet = (url, refresh) => {
       // unAuthorize();
       if (error instanceof AuthenticationError) return error;
     };
-    fetchData(url).then(finish, cancel);
+    fetchData(url, options).then(finish, cancel);
     return () => {};
-  }, [url, refresh]);
+  }, [url, refresh, options]);
 
   return { data, status };
 };
