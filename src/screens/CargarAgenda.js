@@ -6,11 +6,11 @@ import { urlEspecialidadesDeMedico, urlPostAgenda, urlDiasPorMedico } from '../c
 import { useGet } from '../hooks/useFetch';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
 import moment from 'moment';
-
 import { styles, pickerStyle } from '../../styles';
 import { dosMesesAdelante, months, weekdays, mesQueViene } from '../helpers/calendar';
 import { placeholderEspecialidad, placeholderHora } from '../helpers/pickers';
 import { fetchPost } from '../http/post';
+import BurgerMenu from '../BurgerMenu';
 
 const horarios = [
   '08:00',
@@ -36,7 +36,7 @@ const horarios = [
   '18:30',
 ];
 
-export default function CargarAgenda() {
+export default function CargarAgenda({ navigation }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const [especialidad, setEspecialidad] = useState();
@@ -115,6 +115,7 @@ export default function CargarAgenda() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Cargar Agenda</Text>
       </View>
       <View style={styles.centered}>

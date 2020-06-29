@@ -7,6 +7,7 @@ import { styles } from '../../../styles';
 import moment from 'moment';
 import { useGet } from '../../hooks/useFetch';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import BurgerMenu from '../../BurgerMenu';
 
 //metodos auxiliaries
 const calcularHorasEntreFechas = (fechaFin, fechaInicio) => {
@@ -20,7 +21,7 @@ const horasEntreFechas = (fechaInicio, fechaFin) => {
   return Math.floor(Math.abs(hours));
 };
 
-export default function Turnos({}) {
+export default function Turnos({ navigation }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const [refresh, setRefresh] = useState(0);
@@ -83,6 +84,7 @@ export default function Turnos({}) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Mis turnos</Text>
       </View>
       <FlatList

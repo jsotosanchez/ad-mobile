@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const grisAzul = '#495867';
 export const azulOscuro = '#0B132B';
@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     paddingTop: 45,
     paddingBottom: 5,
     textAlign: 'center',
+    flexDirection: 'row',
   },
   container: {
     flex: 1,

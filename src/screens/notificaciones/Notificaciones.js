@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, FlatList, Text } from 'react-native';
 import { useGet } from '../../hooks/useFetch';
 import { fetchPatch } from '../../http/patch';
@@ -6,6 +6,7 @@ import { urlNotificacionesDeUsuario, urlMarcarNotificacionLeida } from '../../co
 import { styles } from '../../../styles';
 import Notificacion from './Notificacion';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import BurgerMenu from '../../BurgerMenu';
 
 export default function Notificaciones({ navigation }) {
   const [refresh, setRefresh] = useState(0);
@@ -30,6 +31,7 @@ export default function Notificaciones({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Notificaciones</Text>
       </View>
       <FlatList
