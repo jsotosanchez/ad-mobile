@@ -45,6 +45,7 @@ export default function ReservarTurnoPaso3({ navigation, route }) {
       console.log(horarioSeleccionado);
       fetchPatch(urlReservarTurno(horarioSeleccionado), { id: userId }).then((r) => {
         if (r.status === 403) {
+          // ya posee un turno con esa especialidad ese dia
           Alert.alert('No puede reservar el turno', r.message);
         }
         Alert.alert('Se ha reservado el turno');
