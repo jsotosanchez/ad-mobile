@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, FlatList, Alert } from 'react-native';
 import Turno from './Turno';
 import { urlTurnosConfirmar, urlTurnosCancelar, urlTurnosDePaciente } from '../../config/urls';
@@ -6,6 +6,7 @@ import { fetchPatch } from '../../http/patch';
 import { styles } from '../../../styles';
 import moment from 'moment';
 import { useGet } from '../../hooks/useFetch';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
 
 //metodos auxiliaries
 const calcularHorasEntreFechas = (fechaFin, fechaInicio) => {
@@ -20,9 +21,10 @@ const horasEntreFechas = (fechaInicio, fechaFin) => {
 };
 
 export default function Turnos({}) {
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
   const [refresh, setRefresh] = useState(0);
-  const { data: turnos, status } = useGet(urlTurnosDePaciente(110), refresh);
-  // const { data: turnos, status } = useGet('https://pokeapi.co/api/v2/pokemon/ditto', refresh);
+  const { data: turnos, status } = useGet(urlTurnosDePaciente(userId), refresh);
 
   const fechaHoy = new Date();
 
