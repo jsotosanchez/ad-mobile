@@ -4,6 +4,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { urlEspecialidades } from '../../config/urls';
 import { useGet } from '../../hooks/useFetch';
 import { styles, pickerStyle } from '../../../styles';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
+
 const placeholderEspecialidad = {
   label: 'Selecciona una especialidad',
   value: null,
@@ -12,6 +14,8 @@ const placeholderEspecialidad = {
 export default function ReservarTurnoPaso1({ navigation }) {
   const [especialidad, setEspecialidad] = useState();
   const { data: especialidades, status } = useGet(urlEspecialidades());
+  const context = useContext(SessionContext);
+  const pagoAlDia = context.getPagoAlDia();
 
   const especialidadesPicker = useMemo(
     () =>
@@ -34,29 +38,40 @@ export default function ReservarTurnoPaso1({ navigation }) {
     setEspecialidad(value);
   };
 
-  return status === 'LOADING' ? (
-    <View>
-      <Text>loading...</Text>
-    </View>
-  ) : (
+  if (pagoAlDia) {
+    return status === 'LOADING' ? (
+      <View>
+        <Text>loading...</Text>
+      </View>
+    ) : (
+      <View style={styles.container}>
+        <View style={styles.centered}>
+          <Text style={styles.label}>Seleccionad una especialidad</Text>
+          {especialidadesPicker && (
+            <View style={styles.label}>
+              <RNPickerSelect
+                onValueChange={handleEspecialidades}
+                items={especialidadesPicker}
+                style={pickerStyle}
+                doneText="Aceptar"
+                value={especialidad}
+                placeholder={placeholderEspecialidad}
+              />
+            </View>
+          )}
+          <TouchableOpacity style={styles.buttonAzulOscuro} onPress={submit}>
+            <Text style={styles.buttonLogInText}>Siguiente</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+  return (
     <View style={styles.container}>
       <View style={styles.centered}>
-        <Text style={styles.label}>Seleccionad una especialidad</Text>
-        {especialidadesPicker && (
-          <View style={styles.label}>
-            <RNPickerSelect
-              onValueChange={handleEspecialidades}
-              items={especialidadesPicker}
-              style={pickerStyle}
-              doneText="Aceptar"
-              value={especialidad}
-              placeholder={placeholderEspecialidad}
-            />
-          </View>
-        )}
-        <TouchableOpacity style={styles.buttonAzulOscuro} onPress={submit}>
-          <Text style={styles.buttonLogInText}>Siguiente</Text>
-        </TouchableOpacity>
+        <Text style={styles.label}>
+          Disculpa, parece que tienes una deuda. No puedes pedir una cita hasta que pagues
+        </Text>
       </View>
     </View>
   );
