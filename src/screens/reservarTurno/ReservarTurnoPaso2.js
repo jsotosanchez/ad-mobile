@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { urlMedicosPorEspecialidad, urlTurnosDisponibles, urlColaDeEspera } from '../../config/urls';
@@ -6,6 +6,7 @@ import { useGet } from '../../hooks/useFetch';
 import { styles, pickerStyle } from '../../../styles';
 import merge from 'lodash/merge';
 import { fetchPost } from '../../http/post';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
 
 const placeholderMedico = {
   label: '(opcional)',
@@ -13,8 +14,9 @@ const placeholderMedico = {
 };
 
 export default function ReservarTurnoPaso2({ navigation, route }) {
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
   const { especialidad } = route.params;
-  /** @type {[number,function]}*/
   const [medico, setMedico] = useState();
   const { data: medicos } = useGet(urlMedicosPorEspecialidad(especialidad));
   const { data: turnos, status } = useGet(urlTurnosDisponibles(especialidad));
@@ -39,7 +41,7 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
     fetchPost(urlColaDeEspera(), {
       especialidadId: especialidad,
       medicoId: medico,
-      pacienteId: 115,
+      pacienteId: userId,
     })
       .then(() => {
         Alert.alert('Se te agrego exitosamente');
