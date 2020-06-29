@@ -60,7 +60,7 @@ export default function CargarAgenda({ navigation }) {
       return;
     }
     if (especialidad && fechaInicio && fechaFin && horaInicio && horaFin) {
-      fetchPost(urlPostAgenda(), {
+      fetchPost(urlPostAgenda(), options, {
         medicoId: userId,
         especialidadId: especialidad,
         fechaInicio,
