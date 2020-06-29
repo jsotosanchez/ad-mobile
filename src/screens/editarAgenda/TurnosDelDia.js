@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
-import {View, FlatList, Alert} from 'react-native';
+import React, { useState } from 'react';
+import { View, FlatList, Alert } from 'react-native';
 import TurnoDoctor from './TurnoDoctor';
-import {fetchDelete} from '../../http/delete';
-import {urlBorrarTurno} from '../../config/urls';
+import { fetchDelete } from '../../http/delete';
+import { urlBorrarTurno } from '../../config/urls';
 
-export default function TurnosDelDia({route}) {
-  // const {turnos} = route.params;
+export default function TurnosDelDia({ route }) {
   const [turnos, setTurnos] = useState(route.params.turnos);
 
-  const borrarTurno = id => {
+  const borrarTurno = (id) => {
     Alert.alert(
       'Está seguro?',
       'Si cancela el turno no se puede deshacer la acción',
@@ -21,18 +20,18 @@ export default function TurnosDelDia({route}) {
           text: 'Aceptar',
           onPress: () => {
             fetchDelete(urlBorrarTurno(id));
-            setTurnos(prev => prev.filter(t => t.id !== id));
+            setTurnos((prev) => prev.filter((t) => t.id !== id));
           },
         },
       ],
-      {cancelable: false},
+      { cancelable: false }
     );
   };
   return (
     <View>
       <FlatList
         data={turnos}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <TurnoDoctor
             especialidad={item.especialidad}
             id={item.id}
@@ -42,7 +41,7 @@ export default function TurnosDelDia({route}) {
             borrarTurno={borrarTurno}
           />
         )}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={(item) => String(item.id)}
       />
     </View>
   );
