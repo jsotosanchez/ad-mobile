@@ -11,8 +11,8 @@ export const useLogIn = () => {
 
   const logIn = useCallback((documento, password) => {
     fetchPost(loginUrl, { username: documento.toLowerCase(), password })
-      .then(({ usuario, id, roles }) => {
-        authenticate({ usuario, id, roles });
+      .then(({ usuario, id, roles, pagoAlDia }) => {
+        authenticate({ usuario, id, roles, pagoAlDia });
       })
       .catch(() => {
         Alert.alert('Revise sus datos');
