@@ -44,8 +44,14 @@ export default function CargarAgenda({ navigation }) {
   const [fechaFin, setFechaFin] = useState('');
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFin, setHoraFin] = useState('');
-  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId));
-  const { data: diasCargados } = useGet(urlDiasPorMedico(userId));
+  const options = useMemo(
+    () => ({
+      credentials: context.getCredentials(),
+    }),
+    [context]
+  );
+  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId), null, options);
+  const { data: diasCargados } = useGet(urlDiasPorMedico(userId), null, options);
 
   function submit() {
     const fechasSonValidas = diasCargados.find((d) => moment(fechaInicio).isBefore(d) && moment(fechaFin).isAfter(d));
