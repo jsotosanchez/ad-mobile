@@ -4,6 +4,7 @@ import CalendarPicker from 'react-native-calendar-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { urlEspecialidadesDeMedico, urlPostAgenda, urlDiasPorMedico } from '../config/urls';
 import { useGet } from '../hooks/useFetch';
+import { useOptions } from '../hooks/useOptions';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
 import moment from 'moment';
 import { styles, pickerStyle } from '../../styles';
@@ -44,12 +45,7 @@ export default function CargarAgenda({ navigation }) {
   const [fechaFin, setFechaFin] = useState('');
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFin, setHoraFin] = useState('');
-  const options = useMemo(
-    () => ({
-      credentials: context.getCredentials(),
-    }),
-    [context]
-  );
+  const options = useOptions(context);
   const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId), null, options);
   const { data: diasCargados } = useGet(urlDiasPorMedico(userId), null, options);
 
