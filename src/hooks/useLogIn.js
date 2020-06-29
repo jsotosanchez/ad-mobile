@@ -10,7 +10,7 @@ export const useLogIn = () => {
   const unAuthorize = context.unAuthorize;
 
   const logIn = useCallback((documento, password) => {
-    fetchPost(loginUrl, { username: documento.toLowerCase(), password })
+    fetchPost(loginUrl, { credientals: { usuario: documento.toLowerCase(), password } })
       .then(({ usuario, id, roles, pagoAlDia }) => {
         authenticate({ usuario, id, roles, pagoAlDia, password });
       })
