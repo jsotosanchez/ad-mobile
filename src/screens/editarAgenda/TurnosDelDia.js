@@ -3,11 +3,15 @@ import { View, FlatList, Alert } from 'react-native';
 import TurnoDoctor from './TurnoDoctor';
 import { fetchDelete } from '../../http/delete';
 import { urlBorrarTurno } from '../../config/urls';
+import moment from 'moment';
 
 export default function TurnosDelDia({ route }) {
   const [turnos, setTurnos] = useState(route.params.turnos);
 
-  const borrarTurno = (id) => {
+  const borrarTurno = (id, horario, getSemanaQueViene) => {
+    console.log('horario', horario);
+    console.log('semana que viene', getSemanaQueViene());
+    console.log(moment(horario).isBefore(getSemanaQueViene()));
     Alert.alert(
       'Está seguro?',
       'Si cancela el turno no se puede deshacer la acción',
