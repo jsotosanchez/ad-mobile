@@ -38,7 +38,7 @@ export const useGet = (url, refresh) => {
     };
     const cancel = (error) => {
       setStatus('ERROR');
-      unAuthorize();
+      // unAuthorize();
       if (error instanceof AuthenticationError) return error;
     };
     fetchData(url).then(finish, cancel);

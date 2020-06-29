@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { urlEspecialidadesDeMedico, urlPostAgenda, urlDiasPorMedico } from '../config/urls';
 import { useGet } from '../hooks/useFetch';
+import { Context as SessionContext } from '../contextComponents/SessionContext';
 import moment from 'moment';
 
 import { styles, pickerStyle } from '../../styles';
@@ -36,13 +37,15 @@ const horarios = [
 ];
 
 export default function CargarAgenda() {
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
   const [especialidad, setEspecialidad] = useState();
   const [fechaInicio, setFechaInicio] = useState('');
   const [fechaFin, setFechaFin] = useState('');
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFin, setHoraFin] = useState('');
-  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(105));
-  const { data: diasCargados } = useGet(urlDiasPorMedico(105));
+  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId));
+  const { data: diasCargados } = useGet(urlDiasPorMedico(userId));
 
   function submit() {
     const fechasSonValidas = diasCargados.find((d) => moment(fechaInicio).isBefore(d) && moment(fechaFin).isAfter(d));
@@ -52,7 +55,7 @@ export default function CargarAgenda() {
     }
     if (especialidad && fechaInicio && fechaFin && horaInicio && horaFin) {
       fetchPost(urlPostAgenda(), {
-        medicoId: '105',
+        medicoId: userId,
         especialidadId: especialidad,
         fechaInicio,
         fechaFin,
