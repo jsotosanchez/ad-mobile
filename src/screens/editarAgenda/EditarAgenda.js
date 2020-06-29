@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { styles } from '../../../styles';
 import { Calendar } from 'react-native-calendars';
@@ -6,11 +6,14 @@ import { getSemanaQueViene, dosMesesAdelante, DATEFORMAT } from '../../helpers/c
 import { useGet } from '../../hooks/useFetch';
 import { urlDiasPorMedico } from '../../config/urls';
 import moment from 'moment';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
 
 export default function EditarAgenda({ navigation }) {
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
   const [fecha, setFecha] = useState(null);
   const fechaInicio = getSemanaQueViene();
-  const { data: diasCargados } = useGet(urlDiasPorMedico(105));
+  const { data: diasCargados } = useGet(urlDiasPorMedico(userId));
 
   const handleOnDateChange = ({ dateString: date }) => {
     setFecha(moment(date).format(DATEFORMAT));
