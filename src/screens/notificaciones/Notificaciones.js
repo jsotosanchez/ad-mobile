@@ -5,15 +5,18 @@ import { fetchPatch } from '../../http/patch';
 import { urlNotificacionesDeUsuario, urlMarcarNotificacionLeida } from '../../config/urls';
 import { styles } from '../../../styles';
 import Notificacion from './Notificacion';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
 
 export default function Notificaciones({ navigation }) {
   const [refresh, setRefresh] = useState(0);
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
 
   const irACartillaMedica = () => {
     navigation.navigate('Cartilla Médica');
   };
 
-  const { data: notificaciones, status } = useGet(urlNotificacionesDeUsuario(105), refresh);
+  const { data: notificaciones, status } = useGet(urlNotificacionesDeUsuario(userId), refresh);
 
   const marcarLeida = (id) => {
     fetchPatch(urlMarcarNotificacionLeida(id));
