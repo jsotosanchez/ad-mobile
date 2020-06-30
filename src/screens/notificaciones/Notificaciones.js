@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, FlatList, Text } from 'react-native';
 import { useGet } from '../../hooks/useFetch';
+import { useOptions } from '../../hooks/useOptions';
 import { fetchPatch } from '../../http/patch';
 import { urlNotificacionesDeUsuario, urlMarcarNotificacionLeida } from '../../config/urls';
 import { styles } from '../../../styles';
@@ -12,15 +13,16 @@ export default function Notificaciones({ navigation }) {
   const [refresh, setRefresh] = useState(0);
   const context = useContext(SessionContext);
   const userId = context.getUserId();
+  const options = useOptions(context);
 
   const irACartillaMedica = () => {
     navigation.navigate('Cartilla Médica');
   };
 
-  const { data: notificaciones, status } = useGet(urlNotificacionesDeUsuario(userId), refresh);
+  const { data: notificaciones, status } = useGet(urlNotificacionesDeUsuario(userId), refresh, options);
 
   const marcarLeida = (id) => {
-    fetchPatch(urlMarcarNotificacionLeida(id));
+    fetchPatch(urlMarcarNotificacionLeida(id), options);
     onRefresh();
   };
 
