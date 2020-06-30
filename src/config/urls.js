@@ -1,4 +1,5 @@
-const URLBASE = 'http://192.168.0.66:8080';
+// const URLBASE = 'http://192.168.0.66:8080';
+const URLBASE = 'https://desolate-retreat-55789.herokuapp.com';
 const URLS = {
   especialidades: `${URLBASE}/especialidades`,
   colaDeEspera: `${URLBASE}/colaDeEspera`,
