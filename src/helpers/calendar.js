@@ -31,7 +31,7 @@ export const mesQueViene = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1);
 
 export const getSemanaQueViene = () => {
   const dayINeed = 1; //lunes
-  return moment().add(1, 'weeks').isoWeekday(dayINeed);
+  return moment().add(1, 'weeks').isoWeekday(dayINeed).add(-1, 'day');
 };
 
 LocaleConfig.locales['es'] = {
