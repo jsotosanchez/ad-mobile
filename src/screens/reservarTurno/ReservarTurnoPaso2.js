@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { urlMedicosPorEspecialidad, urlTurnosDisponibles, urlColaDeEspera } from '../../config/urls';
 import { useGet } from '../../hooks/useFetch';
+import { useOptions } from '../../hooks/useOptions';
 import { styles, pickerStyle } from '../../../styles';
 import merge from 'lodash/merge';
 import { fetchPost } from '../../http/post';
@@ -16,10 +17,11 @@ const placeholderMedico = {
 export default function ReservarTurnoPaso2({ navigation, route }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
+  const options = useOptions(context);
   const { especialidad } = route.params;
   const [medico, setMedico] = useState();
-  const { data: medicos } = useGet(urlMedicosPorEspecialidad(especialidad));
-  const { data: turnos, status } = useGet(urlTurnosDisponibles(especialidad));
+  const { data: medicos } = useGet(urlMedicosPorEspecialidad(especialidad), null, options);
+  const { data: turnos, status } = useGet(urlTurnosDisponibles(especialidad), null, options);
 
   const medicosPicker = useMemo(() => medicos.map((m) => ({ label: m.nombre, value: m.id })), [medicos]);
 
@@ -38,7 +40,7 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
   }
 
   const agregarAColaDeEspera = () => {
-    fetchPost(urlColaDeEspera(), {
+    fetchPost(urlColaDeEspera(), options, {
       especialidadId: especialidad,
       medicoId: medico,
       pacienteId: userId,
