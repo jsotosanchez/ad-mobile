@@ -13,11 +13,11 @@ const placeholderEspecialidad = {
 };
 
 export default function ReservarTurnoPaso1({ navigation }) {
+  const context = useContext(SessionContext);
+  const options = useOptions(context);
+  const pagoAlDia = context.getPagoAlDia();
   const [especialidad, setEspecialidad] = useState();
   const { data: especialidades, status } = useGet(urlEspecialidades(), null, options);
-  const context = useContext(SessionContext);
-  const pagoAlDia = context.getPagoAlDia();
-  const options = useOptions(context);
 
   const especialidadesPicker = useMemo(
     () =>
