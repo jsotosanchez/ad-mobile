@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useGet } from '../../hooks/useFetch';
 import { useOptions } from '../../hooks/useOptions';
@@ -6,6 +6,7 @@ import { fetchDelete } from '../../http/delete';
 import { urlTurnosDeMedico } from '../../config/urls';
 import { styles } from '../../../styles';
 import { urlBorrarTurnosPorDia } from '../../config/urls';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
 
 export default function EditarAgendaStep2({ route, navigation }) {
   const { fecha } = route.params;

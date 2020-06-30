@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, FlatList, Alert } from 'react-native';
 import TurnoDoctor from './TurnoDoctor';
 import { fetchDelete } from '../../http/delete';
 import { urlBorrarTurno } from '../../config/urls';
+import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import { useOptions } from '../../hooks/useOptions';
 
 export default function TurnosDelDia({ route }) {
   const [turnos, setTurnos] = useState(route.params.turnos);
