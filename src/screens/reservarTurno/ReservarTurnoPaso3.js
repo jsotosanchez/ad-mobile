@@ -8,6 +8,7 @@ import { urlReservarTurno } from '../../config/urls';
 import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante as maxDate, DATEFORMAT } from '../../helpers/calendar';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import { useOptions } from '../../hooks/useOptions';
 
 const placeholderHorario = {
   label: 'Selecciona un horario',
@@ -17,6 +18,7 @@ const placeholderHorario = {
 export default function ReservarTurnoPaso3({ navigation, route }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
+  const options = useOptions(context);
   const { turnoSeleccionado: turnos } = route.params;
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
   const [fechaTurno, setFechaTurno] = useState(moment().format(DATEFORMAT));
@@ -42,8 +44,7 @@ export default function ReservarTurnoPaso3({ navigation, route }) {
 
   function submit() {
     if (horarioSeleccionado) {
-      console.log(horarioSeleccionado);
-      fetchPatch(urlReservarTurno(horarioSeleccionado), { id: userId }).then((r) => {
+      fetchPatch(urlReservarTurno(horarioSeleccionado), options, { id: userId }).then((r) => {
         if (r.status === 403) {
           // ya posee un turno con esa especialidad ese dia
           Alert.alert('No puede reservar el turno', r.message);
