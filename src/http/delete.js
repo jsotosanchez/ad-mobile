@@ -2,7 +2,7 @@ import { Base64 } from 'js-base64';
 
 const btoa = Base64.btoa;
 
-export const fetchDelete = async (url, { credientals: { usuario, password } }) => {
+export const fetchDelete = async (url, { credentials: { usuario, password } }) => {
   const response = await fetch(url, {
     method: 'delete',
     headers: {
