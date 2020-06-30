@@ -6,6 +6,7 @@ import { fetchPatch } from '../../http/patch';
 import { styles } from '../../../styles';
 import moment from 'moment';
 import { useGet } from '../../hooks/useFetch';
+import { useOptions } from '../../hooks/useOptions';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import BurgerMenu from '../../BurgerMenu';
 
@@ -24,8 +25,9 @@ const horasEntreFechas = (fechaInicio, fechaFin) => {
 export default function Turnos({ navigation }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
+  const options = useOptions(context);
   const [refresh, setRefresh] = useState(0);
-  const { data: turnos, status } = useGet(urlTurnosDePaciente(userId), refresh);
+  const { data: turnos, status } = useGet(urlTurnosDePaciente(userId), refresh, options);
 
   const fechaHoy = new Date();
 
@@ -48,7 +50,7 @@ export default function Turnos({ navigation }) {
           },
           {
             text: 'Acepto',
-            onPress: () => fetchCancelarTurno(id, onRefresh),
+            onPress: () => fetchCancelarTurno(id, options, onRefresh),
           },
         ],
         { cancelable: false }
@@ -65,7 +67,7 @@ export default function Turnos({ navigation }) {
           },
           {
             text: 'Acepto',
-            onPress: () => fetchCancelarTurno(id, onRefresh),
+            onPress: () => fetchCancelarTurno(id, options, onRefresh),
           },
         ],
         { cancelable: false }
@@ -74,7 +76,7 @@ export default function Turnos({ navigation }) {
   };
 
   const confirmarTurno = (id) => {
-    fetchConfirmarTurno(id, onRefresh);
+    fetchConfirmarTurno(id, options, onRefresh);
   };
 
   const onRefresh = () => {
@@ -111,8 +113,8 @@ export default function Turnos({ navigation }) {
   );
 }
 
-function fetchConfirmarTurno(id, onRefresh) {
-  fetchPatch(urlTurnosConfirmar(id))
+function fetchConfirmarTurno(id, options, onRefresh) {
+  fetchPatch(urlTurnosConfirmar(id), options)
     .then((res) => {
       Alert.alert('Se ha confirmado su turno');
       onRefresh();
@@ -123,8 +125,8 @@ function fetchConfirmarTurno(id, onRefresh) {
     });
 }
 
-function fetchCancelarTurno(id, onRefresh) {
-  return fetchPatch(urlTurnosCancelar(id))
+function fetchCancelarTurno(id, options, onRefresh) {
+  return fetchPatch(urlTurnosCancelar(id), options)
     .then((res) => {
       Alert.alert('Se ha cancelado su turno');
       onRefresh();
