@@ -1,4 +1,8 @@
-export const fetchPatch = async (url, { credientals: { usuario, password } }, obj) => {
+import { Base64 } from 'js-base64';
+
+const btoa = Base64.btoa;
+
+export const fetchPatch = async (url, { credentials: { usuario, password } }, obj) => {
   const response = await fetch(url, {
     method: 'patch',
     headers: {
