@@ -53,27 +53,3 @@ export const useGet = (url, refresh, options) => {
 
   return { data, status };
 };
-
-/**
- *
- * @param {string} url
- * @param {import('./useSesion').LogIn} obj
- * @returns {Promise<import('./useSesion').Sesion>}
- */
-export const logIn = async (url, obj) => {
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  })
-    .then((res) => {
-      console.log();
-      if (res.ok) {
-        return res;
-      }
-      throw Error('Error');
-    })
-    .then((res) => res.json());
-};
