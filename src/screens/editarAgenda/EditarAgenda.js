@@ -4,6 +4,7 @@ import { styles } from '../../../styles';
 import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante, DATEFORMAT } from '../../helpers/calendar';
 import { useGet } from '../../hooks/useFetch';
+import { useOptions } from '../../hooks/useOptions';
 import { urlDiasPorMedico } from '../../config/urls';
 import moment from 'moment';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
@@ -11,8 +12,9 @@ import { Context as SessionContext } from '../../contextComponents/SessionContex
 export default function EditarAgenda({ navigation }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
+  const options = useOptions(context);
   const [fecha, setFecha] = useState(null);
-  const { data: diasCargados } = useGet(urlDiasPorMedico(userId));
+  const { data: diasCargados } = useGet(urlDiasPorMedico(userId), null, options);
 
   const handleOnDateChange = ({ dateString: date }) => {
     setFecha(moment(date).format(DATEFORMAT));

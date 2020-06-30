@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useGet } from '../../hooks/useFetch';
+import { useOptions } from '../../hooks/useOptions';
 import { fetchDelete } from '../../http/delete';
 import { urlTurnosDeMedico } from '../../config/urls';
 import { styles } from '../../../styles';
@@ -8,7 +9,10 @@ import { urlBorrarTurnosPorDia } from '../../config/urls';
 
 export default function EditarAgendaStep2({ route, navigation }) {
   const { fecha } = route.params;
-  const { data: turnos } = useGet(urlTurnosDeMedico(105, fecha), null);
+  const context = useContext(SessionContext);
+  const userId = context.getUserId();
+  const options = useOptions(context);
+  const { data: turnos } = useGet(urlTurnosDeMedico(userId, fecha), null, options);
   const handleVerTurnos = () => {
     navigation.navigate('TurnosDelDia', { fecha, turnos });
   };
@@ -24,7 +28,7 @@ export default function EditarAgendaStep2({ route, navigation }) {
         {
           text: 'Acepto',
           onPress: () =>
-            fetchDelete(urlBorrarTurnosPorDia(105, fecha))
+            fetchDelete(urlBorrarTurnosPorDia(userId, fecha), options)
               .then(() => Alert.alert('Se han eliminado todos los turnos exitosamente'))
               .catch(() => Alert.alert('Ocurrió un error, intenta mas tarde')),
         },
