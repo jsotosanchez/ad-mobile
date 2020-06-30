@@ -23,7 +23,7 @@ export default function TurnoDoctor({ id, paciente, horario, confirmado, especia
           <TouchableOpacity
             disabled={disabled}
             style={disabled ? styles.buttonAceptarDisabled : styles.buttonCancelar}
-            onPress={() => borrarTurno(id, horario, getSemanaQueViene)}
+            onPress={() => borrarTurno(id)}
           >
             <Text style={styles.buttonLogInText}>Eliminar</Text>
           </TouchableOpacity>
