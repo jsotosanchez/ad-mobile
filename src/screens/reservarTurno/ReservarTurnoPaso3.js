@@ -48,6 +48,8 @@ export default function ReservarTurnoPaso3({ navigation, route }) {
         if (r.status === 403) {
           // ya posee un turno con esa especialidad ese dia
           Alert.alert('No puede reservar el turno', r.message);
+          navigation.popToTop();
+          return;
         }
         Alert.alert('Se ha reservado el turno');
         navigation.popToTop();
