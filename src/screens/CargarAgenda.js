@@ -72,7 +72,7 @@ export default function CargarAgenda({ navigation }) {
           setHoraInicio('');
           setHoraFin('');
         })
-        .catch((e) => Alert.alert('Ha ocurrido un error intenta mas tarde' + String(e)));
+        .catch((e) => Alert.alert('Ha ocurrido un error, intenta mas tarde'));
       return;
     }
     Alert.alert('Por favor completa los datos');

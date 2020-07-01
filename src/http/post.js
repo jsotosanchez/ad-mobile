@@ -15,7 +15,7 @@ export const fetchPost = async (url, { credentials: { usuario, password } }, obj
     .then((res) => {
       if (res.ok) {
         return res;
-      } else if (err.status === 401) {
+      } else if (res.status === 401) {
         throw new AuthenticationError();
       }
       throw Error('Error');
