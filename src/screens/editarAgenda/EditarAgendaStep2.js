@@ -10,7 +10,7 @@ import { Context as SessionContext } from '../../contextComponents/SessionContex
 import BackButton from '../../navigation/BackButton';
 
 export default function EditarAgendaStep2({ route, navigation }) {
-  const { fecha } = route.params;
+  const { fecha, handleOnRefresh } = route.params;
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
@@ -31,8 +31,18 @@ export default function EditarAgendaStep2({ route, navigation }) {
           text: 'Acepto',
           onPress: () =>
             fetchDelete(urlBorrarTurnosPorDia(userId, fecha), options)
-              .then(() => Alert.alert('Se han eliminado todos los turnos exitosamente'))
-              .catch(() => Alert.alert('Ocurrió un error, intenta mas tarde')),
+              .then(() => {
+                Alert.alert('Se han eliminado todos los turnos exitosamente');
+                handleOnRefresh();
+                navigation.pop();
+              })
+              .catch(() => {
+                {
+                  Alert.alert('Se han eliminado todos los turnos exitosamente');
+                  handleOnRefresh();
+                  navigation.pop();
+                }
+              }),
         },
       ]);
     } else {

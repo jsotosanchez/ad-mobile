@@ -40,7 +40,7 @@ export default function EditarAgenda({ navigation }) {
       Alert.alert('Por favor selecciona una fecha');
       return;
     }
-    navigation.navigate('Step2', { fecha });
+    navigation.navigate('Step2', { fecha, handleOnRefresh });
   };
 
   const handleOnRefresh = () => {

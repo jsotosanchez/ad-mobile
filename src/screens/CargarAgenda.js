@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { View, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ScrollView, RefreshControl } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { urlEspecialidadesDeMedico, urlPostAgenda, urlDiasPorMedico } from '../config/urls';
@@ -47,7 +47,7 @@ export default function CargarAgenda({ navigation }) {
   const [horaFin, setHoraFin] = useState('');
   const options = useOptions(context);
   const [refresh, setRefresh] = useState(0);
-  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId), refresh, options);
+  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId), null, options);
   const { data: diasCargados, status } = useGet(urlDiasPorMedico(userId), refresh, options);
 
   function submit() {
@@ -67,7 +67,7 @@ export default function CargarAgenda({ navigation }) {
       })
         .then(() => {
           Alert.alert('Se ha cargado tu agenda con exito');
-          onRefresh();
+          handleOnRefresh();
           setEspecialidad(null);
           setFechaFin('');
           setFechaInicio('');
@@ -80,7 +80,7 @@ export default function CargarAgenda({ navigation }) {
     Alert.alert('Por favor completa los datos');
   }
 
-  const onRefresh = () => {
+  const handleOnRefresh = () => {
     setRefresh((prev) => prev + 1);
   };
 
@@ -121,71 +121,72 @@ export default function CargarAgenda({ navigation }) {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      refreshing={status === 'LOADING'}
-      onRefresh={() => {
-        onRefresh();
-      }}
-    >
+    <>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Cargar Agenda</Text>
       </View>
-      <View style={styles.centered}>
-        <Text style={styles.label}>Especialidad</Text>
-        {especialidadesPicker && (
-          <View style={styles.label}>
-            <RNPickerSelect
-              onValueChange={handleEspecialidades}
-              items={especialidadesPicker}
-              style={pickerStyle}
-              doneText="Aceptar"
-              value={especialidad}
-              placeholder={placeholderEspecialidad}
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl refreshing={status === 'LOADING'} onRefresh={handleOnRefresh} title="Cargando..." />
+        }
+      >
+        <View style={styles.centered}>
+          <Text style={styles.label}>Especialidad</Text>
+          {especialidadesPicker && (
+            <View style={styles.label}>
+              <RNPickerSelect
+                onValueChange={handleEspecialidades}
+                items={especialidadesPicker}
+                style={pickerStyle}
+                doneText="Aceptar"
+                value={especialidad}
+                placeholder={placeholderEspecialidad}
+              />
+            </View>
+          )}
+          <Text style={styles.label}>Rango de fechas</Text>
+          <View style={styles.calendar}>
+            <CalendarPicker
+              // @ts-ignore
+              onDateChange={(date, type) => handleDateChange(date, type)}
+              minDate={mesQueViene}
+              maxDate={dosMesesAdelante}
+              width={300}
+              allowRangeSelection={true}
+              weekdays={weekdays}
+              months={months}
+              previousTitle="Anterior"
+              nextTitle="Próximo"
+              selectedDayColor="#00AEF5"
+              initialDate={mesQueViene}
+              disabledDates={diasCargados}
             />
           </View>
-        )}
-        <Text style={styles.label}>Rango de fechas</Text>
-        <View style={styles.calendar}>
-          <CalendarPicker
-            // @ts-ignore
-            onDateChange={(date, type) => handleDateChange(date, type)}
-            minDate={mesQueViene}
-            maxDate={dosMesesAdelante}
-            width={300}
-            allowRangeSelection={true}
-            weekdays={weekdays}
-            months={months}
-            previousTitle="Anterior"
-            nextTitle="Próximo"
-            selectedDayColor="#00AEF5"
-            initialDate={mesQueViene}
-            disabledDates={diasCargados}
+          <Text style={styles.label}>Hora Inicio</Text>
+          <RNPickerSelect
+            onValueChange={handleHoraInicio}
+            items={horariosPicker}
+            style={pickerStyle}
+            doneText="Aceptar"
+            value={horaInicio}
+            placeholder={placeholderHora}
           />
+          <Text style={styles.label}>Hora Fin</Text>
+          <RNPickerSelect
+            onValueChange={handleHoraFin}
+            items={horariosPicker}
+            style={pickerStyle}
+            doneText="Aceptar"
+            value={horaFin}
+            placeholder={placeholderHora}
+          />
+          <TouchableOpacity style={styles.buttonAzulOscuro} onPress={submit}>
+            <Text style={styles.buttonLogInText}>Cargar Agenda</Text>
+          </TouchableOpacity>
         </View>
-        <Text style={styles.label}>Hora Inicio</Text>
-        <RNPickerSelect
-          onValueChange={handleHoraInicio}
-          items={horariosPicker}
-          style={pickerStyle}
-          doneText="Aceptar"
-          value={horaInicio}
-          placeholder={placeholderHora}
-        />
-        <Text style={styles.label}>Hora Fin</Text>
-        <RNPickerSelect
-          onValueChange={handleHoraFin}
-          items={horariosPicker}
-          style={pickerStyle}
-          doneText="Aceptar"
-          value={horaFin}
-          placeholder={placeholderHora}
-        />
-        <TouchableOpacity style={styles.buttonAzulOscuro} onPress={submit}>
-          <Text style={styles.buttonLogInText}>Cargar Agenda</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 }
