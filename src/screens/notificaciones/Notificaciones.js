@@ -16,7 +16,7 @@ export default function Notificaciones({ navigation }) {
   const options = useOptions(context);
 
   const irACartillaMedica = () => {
-    navigation.navigate('Cartilla Médica');
+    navigation.navigate('Reservar Turno');
   };
 
   const { data: notificaciones, status } = useGet(urlNotificacionesDeUsuario(userId), refresh, options);
