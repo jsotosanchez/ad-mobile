@@ -10,6 +10,7 @@ import Notificaciones from '../screens/notificaciones/Notificaciones';
 import { EditarAgenaStackNavigation } from './EditarAgendaStackNavigation';
 import { ReservarTurnoStackNavigation } from './ReservarTurnosStackNavigation';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
+import SignOut from '../screens/SignOut';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -63,8 +64,9 @@ function AuthorizedContent({ isMedico }) {
         <></>
       )}
       <Drawer.Screen name="Citas medicas" component={Turnos} />
-      <Drawer.Screen name="Cartilla Médica" component={ReservarTurnoStackNavigation} />
+      <Drawer.Screen name="Reservar Turno" component={ReservarTurnoStackNavigation} />
       <Drawer.Screen name="Notificaciones" component={Notificaciones} />
+      <Drawer.Screen name="Salir" component={SignOut} />
     </Drawer.Navigator>
   );
 }

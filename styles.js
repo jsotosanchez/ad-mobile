@@ -22,6 +22,11 @@ export const styles = StyleSheet.create({
     paddingLeft: 60,
     paddingRight: 60,
   },
+  logOut: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   title: {
     padding: 60,
     paddingTop: 150,
@@ -105,6 +110,15 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: blanco,
+  },
+  buttonLogOut: {
+    backgroundColor: rojo,
+    alignItems: 'center',
+    padding: 8,
+    paddingLeft: 40,
+    paddingRight: 40,
+    borderRadius: 45,
+    marginBottom: 40,
   },
   buttonBlancoText: {
     fontSize: 20,
