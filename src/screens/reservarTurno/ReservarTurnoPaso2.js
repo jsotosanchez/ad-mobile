@@ -8,7 +8,7 @@ import { styles, pickerStyle } from '../../../styles';
 import merge from 'lodash/merge';
 import { fetchPost } from '../../http/post';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
-import BackButton from '../../BackButton';
+import BackButton from '../../navigation/BackButton';
 
 const placeholderMedico = {
   label: '(opcional)',

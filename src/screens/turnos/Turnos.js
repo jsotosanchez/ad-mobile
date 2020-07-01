@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useGet } from '../../hooks/useFetch';
 import { useOptions } from '../../hooks/useOptions';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
-import BurgerMenu from '../../BurgerMenu';
+import BurgerMenu from '../../navigation/BurgerMenu';
 
 //metodos auxiliaries
 const calcularHorasEntreFechas = (fechaFin, fechaInicio) => {

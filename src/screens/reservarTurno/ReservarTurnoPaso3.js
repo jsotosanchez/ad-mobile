@@ -9,7 +9,7 @@ import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante as maxDate, DATEFORMAT } from '../../helpers/calendar';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import { useOptions } from '../../hooks/useOptions';
-import BackButton from '../../BackButton';
+import BackButton from '../../navigation/BackButton';
 
 const placeholderHorario = {
   label: 'Selecciona un horario',

@@ -6,7 +6,7 @@ import { useOptions } from '../../hooks/useOptions';
 import { useGet } from '../../hooks/useFetch';
 import { styles, pickerStyle } from '../../../styles';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
-import BurgerMenu from '../../BurgerMenu';
+import BurgerMenu from '../../navigation/BurgerMenu';
 
 const placeholderEspecialidad = {
   label: 'Selecciona una especialidad',

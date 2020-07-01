@@ -7,7 +7,7 @@ import { urlNotificacionesDeUsuario, urlMarcarNotificacionLeida } from '../../co
 import { styles } from '../../../styles';
 import Notificacion from './Notificacion';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
-import BurgerMenu from '../../BurgerMenu';
+import BurgerMenu from '../../navigation/BurgerMenu';
 
 export default function Notificaciones({ navigation }) {
   const [refresh, setRefresh] = useState(0);

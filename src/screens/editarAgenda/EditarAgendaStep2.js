@@ -7,7 +7,7 @@ import { urlTurnosDeMedico } from '../../config/urls';
 import { styles } from '../../../styles';
 import { urlBorrarTurnosPorDia } from '../../config/urls';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
-import BackButton from '../../BackButton';
+import BackButton from '../../navigation/BackButton';
 
 export default function EditarAgendaStep2({ route, navigation }) {
   const { fecha } = route.params;

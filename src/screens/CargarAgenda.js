@@ -11,7 +11,7 @@ import { styles, pickerStyle } from '../../styles';
 import { dosMesesAdelante, months, weekdays, mesQueViene } from '../helpers/calendar';
 import { placeholderEspecialidad, placeholderHora } from '../helpers/pickers';
 import { fetchPost } from '../http/post';
-import BurgerMenu from '../BurgerMenu';
+import BurgerMenu from '../navigation/BurgerMenu';
 
 const horarios = [
   '08:00',

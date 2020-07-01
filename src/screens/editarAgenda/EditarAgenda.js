@@ -8,7 +8,7 @@ import { useOptions } from '../../hooks/useOptions';
 import { urlDiasPorMedico } from '../../config/urls';
 import moment from 'moment';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
-import BurgerMenu from '../../BurgerMenu';
+import BurgerMenu from '../../navigation/BurgerMenu';
 
 export default function EditarAgenda({ navigation }) {
   const context = useContext(SessionContext);

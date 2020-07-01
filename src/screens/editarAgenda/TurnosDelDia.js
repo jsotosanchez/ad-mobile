@@ -5,7 +5,7 @@ import { fetchDelete } from '../../http/delete';
 import { urlBorrarTurno } from '../../config/urls';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import { useOptions } from '../../hooks/useOptions';
-import BackButton from '../../BackButton';
+import BackButton from '../../navigation/BackButton';
 import { styles } from '../../../styles';
 
 export default function TurnosDelDia({ route, navigation }) {
