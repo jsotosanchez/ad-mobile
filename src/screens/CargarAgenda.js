@@ -46,8 +46,9 @@ export default function CargarAgenda({ navigation }) {
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFin, setHoraFin] = useState('');
   const options = useOptions(context);
-  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId), null, options);
-  const { data: diasCargados } = useGet(urlDiasPorMedico(userId), null, options);
+  const [refresh, setRefresh] = useState(0);
+  const { data: especialidades } = useGet(urlEspecialidadesDeMedico(userId), refresh, options);
+  const { data: diasCargados, status } = useGet(urlDiasPorMedico(userId), refresh, options);
 
   function submit() {
     const fechasSonValidas = diasCargados.find((d) => moment(fechaInicio).isBefore(d) && moment(fechaFin).isAfter(d));
@@ -66,6 +67,7 @@ export default function CargarAgenda({ navigation }) {
       })
         .then(() => {
           Alert.alert('Se ha cargado tu agenda con exito');
+          onRefresh();
           setEspecialidad(null);
           setFechaFin('');
           setFechaInicio('');
@@ -77,6 +79,10 @@ export default function CargarAgenda({ navigation }) {
     }
     Alert.alert('Por favor completa los datos');
   }
+
+  const onRefresh = () => {
+    setRefresh((prev) => prev + 1);
+  };
 
   const especialidadesPicker = useMemo(
     () =>
@@ -115,7 +121,13 @@ export default function CargarAgenda({ navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshing={status === 'LOADING'}
+      onRefresh={() => {
+        onRefresh();
+      }}
+    >
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Cargar Agenda</Text>
