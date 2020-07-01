@@ -6,6 +6,7 @@ import { useOptions } from '../../hooks/useOptions';
 import { useGet } from '../../hooks/useFetch';
 import { styles, pickerStyle } from '../../../styles';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import BurgerMenu from '../../BurgerMenu';
 
 const placeholderEspecialidad = {
   label: 'Selecciona una especialidad',
@@ -42,11 +43,18 @@ export default function ReservarTurnoPaso1({ navigation }) {
 
   if (pagoAlDia) {
     return status === 'LOADING' ? (
-      <View>
-        <Text>loading...</Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <BurgerMenu navigation={navigation} />
+          <Text style={styles.h1}>Reservar Turno</Text>
+        </View>
       </View>
     ) : (
       <View style={styles.container}>
+        <View style={styles.header}>
+          <BurgerMenu navigation={navigation} />
+          <Text style={styles.h1}>Reservar Turno</Text>
+        </View>
         <View style={styles.centered}>
           <Text style={styles.label}>Seleccionad una especialidad</Text>
           {especialidadesPicker && (

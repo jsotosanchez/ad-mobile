@@ -12,7 +12,11 @@ const ReservarTurnoNavigation = createStackNavigator();
 export const ReservarTurnoStackNavigation = () => {
   return (
     <View style={styles.container}>
-      <ReservarTurnoNavigation.Navigator>
+      <ReservarTurnoNavigation.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <ReservarTurnoNavigation.Screen
           name="Reserva de turno"
           component={ReservarTurnoPaso1}

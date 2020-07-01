@@ -9,6 +9,7 @@ import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante as maxDate, DATEFORMAT } from '../../helpers/calendar';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import { useOptions } from '../../hooks/useOptions';
+import BackButton from '../../BackButton';
 
 const placeholderHorario = {
   label: 'Selecciona un horario',
@@ -69,6 +70,10 @@ export default function ReservarTurnoPaso3({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <BackButton navigation={navigation} />
+        <Text style={styles.h1}>Reservar Turno</Text>
+      </View>
       <View style={styles.centered}>
         <Text style={styles.label}>Dia</Text>
         <View style={styles.calendar}>

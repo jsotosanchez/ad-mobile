@@ -8,6 +8,7 @@ import { styles, pickerStyle } from '../../../styles';
 import merge from 'lodash/merge';
 import { fetchPost } from '../../http/post';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import BackButton from '../../BackButton';
 
 const placeholderMedico = {
   label: '(opcional)',
@@ -55,6 +56,10 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
   if (status === 'DONE' && Object.keys(turnos).length === 0) {
     return (
       <View style={styles.container}>
+        <View style={styles.header}>
+          <BackButton navigation={navigation} />
+          <Text style={styles.h1}>Reservar Turno</Text>
+        </View>
         <View style={styles.centered}>
           <Text style={styles.labelCentered}>No hay turnos disponibles</Text>
           <Text style={styles.text}>Quieres anotarte en la cola de espera?</Text>
@@ -83,6 +88,10 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <BackButton navigation={navigation} />
+        <Text style={styles.h1}>Reservar Turno</Text>
+      </View>
       <View style={styles.centered}>
         {medicosPicker && (
           <>
