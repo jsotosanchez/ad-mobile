@@ -20,11 +20,12 @@ export default function ReservarTurnoPaso3({ navigation, route }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
-  const { turnoSeleccionado: turnos } = route.params;
+  const { turnosSeleccionados: turnos } = route.params;
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
   const [fechaTurno, setFechaTurno] = useState(moment().format(DATEFORMAT));
   const hoy = new Date();
 
+  console.log(turnos);
   // @ts-ignore
   const diasMarcados = Object.fromEntries(
     Object.keys(turnos).map((t) => {

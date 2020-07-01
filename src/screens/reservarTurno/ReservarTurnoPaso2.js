@@ -31,13 +31,18 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
   };
 
   function irAPantallaSiguiente() {
-    let turnoSeleccionado;
+    let turnosSeleccionados;
     if (medico) {
-      turnoSeleccionado = turnos[medico];
+      if (turnos[medico]) turnosSeleccionados = turnos[medico];
+      else turnosSeleccionados = [];
     } else {
-      turnoSeleccionado = Object.values(turnos).reduce((acc, curr) => merge(acc, curr));
+      turnosSeleccionados = Object.values(turnos).reduce((acc, curr) => merge(acc, curr));
     }
-    navigation.navigate('Paso3', { medico, turnoSeleccionado });
+    if (turnosSeleccionados.length === 0) {
+      Alert.alert('Lo sentimos, ese medico no tiene turnos disponibles');
+      return;
+    }
+    navigation.navigate('Paso3', { medico, turnosSeleccionados });
   }
 
   const agregarAColaDeEspera = () => {
