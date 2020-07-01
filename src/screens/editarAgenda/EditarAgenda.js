@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import { styles } from '../../../styles';
 import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante, DATEFORMAT } from '../../helpers/calendar';
@@ -9,13 +9,15 @@ import { urlDiasPorMedico } from '../../config/urls';
 import moment from 'moment';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import BurgerMenu from '../../navigation/BurgerMenu';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function EditarAgenda({ navigation }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
   const [fecha, setFecha] = useState(null);
-  const { data: diasCargados } = useGet(urlDiasPorMedico(userId), null, options);
+  const [refresh, setRefresh] = useState(0);
+  const { data: diasCargados, status } = useGet(urlDiasPorMedico(userId), refresh, options);
 
   const handleOnDateChange = ({ dateString: date }) => {
     setFecha(moment(date).format(DATEFORMAT));
@@ -30,7 +32,7 @@ export default function EditarAgenda({ navigation }) {
           return [t, { marked: true }];
         })
       ),
-    [diasCargados]
+    [diasCargados, refresh]
   );
 
   const handleNavigation = () => {
@@ -40,31 +42,43 @@ export default function EditarAgenda({ navigation }) {
     }
     navigation.navigate('Step2', { fecha });
   };
+
+  const handleOnRefresh = () => {
+    setRefresh((prev) => prev + 1);
+  };
+
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Mi Agenda</Text>
       </View>
-      <View style={styles.centered}>
-        <Text style={styles.label}>Selecciona una fecha</Text>
-        <View style={styles.calendar}>
-          <Calendar
-            minDate={hoy}
-            maxDate={dosMesesAdelante}
-            onDayPress={handleOnDateChange}
-            markedDates={{
-              ...diasAMarcar,
-              [fecha]: {
-                selected: true,
-              },
-            }}
-          />
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl refreshing={status === 'LOADING'} onRefresh={handleOnRefresh} title="Cargando..." />
+        }
+      >
+        <View style={styles.centered}>
+          <Text style={styles.label}>Selecciona una fecha</Text>
+          <View style={styles.calendar}>
+            <Calendar
+              minDate={hoy}
+              maxDate={dosMesesAdelante}
+              onDayPress={handleOnDateChange}
+              markedDates={{
+                ...diasAMarcar,
+                [fecha]: {
+                  selected: true,
+                },
+              }}
+            />
+          </View>
+          <TouchableOpacity style={styles.buttonAzulOscuro} onPress={() => handleNavigation()}>
+            <Text style={styles.buttonLogInText}>Siguiente</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.buttonAzulOscuro} onPress={() => handleNavigation()}>
-          <Text style={styles.buttonLogInText}>Siguiente</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      </ScrollView>
+    </>
   );
 }
