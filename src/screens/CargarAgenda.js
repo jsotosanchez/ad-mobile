@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { urlEspecialidadesDeMedico, urlPostAgenda, urlDiasPorMedico } from '../config/urls';
@@ -115,7 +115,7 @@ export default function CargarAgenda({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
         <Text style={styles.h1}>Cargar Agenda</Text>
@@ -174,6 +174,6 @@ export default function CargarAgenda({ navigation }) {
           <Text style={styles.buttonLogInText}>Cargar Agenda</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }

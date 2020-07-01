@@ -9,14 +9,13 @@ export const blanco = '#F7F7FF';
 export const styles = StyleSheet.create({
   header: {
     backgroundColor: grisAzul,
-    paddingTop: 45,
+    paddingTop: 30,
     paddingBottom: 5,
     textAlign: 'center',
     flexDirection: 'row',
   },
   container: {
     flex: 1,
-    fontFamily: 'Helvetica',
   },
   logInForm: {
     flex: 1,
@@ -195,8 +194,8 @@ export const pickerStyle = {
     color: 'black',
     paddingRight: 30,
     backgroundColor: '#F7F7FF',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 15,
     width: 300,
   },
   inputAndroid: {
@@ -207,8 +206,8 @@ export const pickerStyle = {
     color: 'black',
     paddingRight: 30,
     backgroundColor: '#F7F7FF',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 15,
     width: 300,
   },
 };
