@@ -7,6 +7,7 @@ import { urlTurnosDeMedico } from '../../config/urls';
 import { styles } from '../../../styles';
 import { urlBorrarTurnosPorDia } from '../../config/urls';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
+import BackButton from '../../BackButton';
 
 export default function EditarAgendaStep2({ route, navigation }) {
   const { fecha } = route.params;
@@ -40,14 +41,20 @@ export default function EditarAgendaStep2({ route, navigation }) {
   };
 
   return (
-    <View style={styles.centered}>
-      <Text style={styles.labelCentered}>{fecha.slice(0, 10)}</Text>
-      <TouchableOpacity style={{ ...styles.buttonBlanco, marginTop: 20 }} onPress={() => handleVerTurnos()}>
-        <Text style={styles.buttonBlancoText}>Ver turnos del dia</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonBlanco} onPress={() => handleEliminar()}>
-        <Text style={styles.buttonBlancoText}>Eliminar dia</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <BackButton navigation={navigation} />
+        <Text style={styles.h1}>Mi Agenda</Text>
+      </View>
+      <View style={styles.centered}>
+        <Text style={styles.labelCentered}>{fecha.slice(0, 10)}</Text>
+        <TouchableOpacity style={{ ...styles.buttonBlanco, marginTop: 20 }} onPress={() => handleVerTurnos()}>
+          <Text style={styles.buttonBlancoText}>Ver turnos del dia</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonBlanco} onPress={() => handleEliminar()}>
+          <Text style={styles.buttonBlancoText}>Eliminar dia</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

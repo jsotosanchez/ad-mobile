@@ -11,7 +11,11 @@ const EditarAgendaNavigation = createStackNavigator();
 export const EditarAgenaStackNavigation = () => {
   return (
     <View style={styles.container}>
-      <EditarAgendaNavigation.Navigator>
+      <EditarAgendaNavigation.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <EditarAgendaNavigation.Screen
           name="Editar Agenda"
           component={EditarAgenda}

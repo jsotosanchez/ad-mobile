@@ -37,18 +37,12 @@ export const styles = StyleSheet.create({
     color: blanco,
     fontWeight: 'bold',
   },
-  h2: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: blanco,
-    fontFamily: 'Helvetica',
-    fontWeight: 'bold',
-  },
-  h3: {
-    fontSize: 25,
+  backButton: {
+    fontSize: 15,
     textAlign: 'center',
     color: blanco,
     fontWeight: 'bold',
+    paddingTop: 10,
   },
   label: {
     fontSize: 20,
