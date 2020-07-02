@@ -91,6 +91,19 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
     );
   }
 
+  if (status === 'LOADING')
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <BackButton navigation={navigation} />
+          <Text style={styles.h1}>Reservar Turno</Text>
+        </View>
+        <View style={styles.centered}>
+          <Text style={styles.labelCentered}>Cargando...</Text>
+        </View>
+      </View>
+    );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
