@@ -197,6 +197,12 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
   },
+  labelSignIn: {
+    fontSize: 12,
+    fontWeight: 'normal',
+    color: '#0B132B',
+    textAlign: 'center',
+  },
 });
 
 export const pickerStyle = {

@@ -15,7 +15,7 @@ export const useLogIn = () => {
         authenticate({ usuario, id, roles, pagoAlDia, password });
       })
       .catch(() => {
-        Alert.alert('Revise sus datos');
+        Alert.alert('Algunos de los datos son incorrectos, por favor verifiquelos');
         unAuthorize();
       });
   }, []);

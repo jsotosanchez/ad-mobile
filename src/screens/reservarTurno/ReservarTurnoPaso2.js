@@ -52,7 +52,7 @@ export default function ReservarTurnoPaso2({ navigation, route }) {
       pacienteId: userId,
     })
       .then(() => {
-        Alert.alert('Se te agrego exitosamente');
+        Alert.alert('Se te agrego exitosamente a la cola de espera');
         navigation.popToTop();
       })
       .catch(() => Alert.alert('Ha ocurrido un error, intenta mas tarde'));

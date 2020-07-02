@@ -57,8 +57,8 @@ function AuthorizedContent({ isMedico }) {
     <Drawer.Navigator>
       {isMedico ? (
         <>
-          <Drawer.Screen name="Cargar Agenda" component={CargarAgenda} />
           <Drawer.Screen name="Mi Agenda" component={EditarAgenaStackNavigation} />
+          <Drawer.Screen name="Cargar Agenda" component={CargarAgenda} />          
         </>
       ) : (
         <></>

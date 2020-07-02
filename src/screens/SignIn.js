@@ -26,6 +26,8 @@ export default function SignIn() {
             <Text style={styles.buttonLogInText}>Ingresar</Text>
           </TouchableOpacity>
         </View>
+        <Text style={styles.labelSignIn}>Recordar Usuario:</Text>
+        <Text style={styles.labelSignIn}>Olvide mi contraseña</Text>
       </View>
     </View>
   );
