@@ -8,6 +8,8 @@ import { styles } from '../../../styles';
 import { urlBorrarTurnosPorDia } from '../../config/urls';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import BackButton from '../../navigation/BackButton';
+import { getSemanaQueViene } from '../../helpers/calendar';
+import moment from 'moment';
 
 export default function EditarAgendaStep2({ route, navigation }) {
   const { fecha, handleOnRefresh } = route.params;
@@ -19,12 +21,14 @@ export default function EditarAgendaStep2({ route, navigation }) {
     navigation.navigate('TurnosDelDia', { fecha, turnos });
   };
 
+  const fechaEsModificable = moment(fecha).isAfter(getSemanaQueViene());
+
   const handleEliminar = () => {
     if (turnos.filter((t) => t.paciente).length === 0) {
       Alert.alert('Estas seguro?', 'Quieres eliminar todos los turnos del dia?', [
         {
           text: 'Regresar',
-          onPress: () => console.log('Deteniendo cancelar turno'),
+          onPress: () => {},
           style: 'cancel',
         },
         {
@@ -61,9 +65,11 @@ export default function EditarAgendaStep2({ route, navigation }) {
         <TouchableOpacity style={{ ...styles.buttonBlanco, marginTop: 20 }} onPress={() => handleVerTurnos()}>
           <Text style={styles.buttonBlancoText}>Ver turnos del dia</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonBlanco} onPress={() => handleEliminar()}>
-          <Text style={styles.buttonBlancoText}>Eliminar dia</Text>
-        </TouchableOpacity>
+        {fechaEsModificable && (
+          <TouchableOpacity style={styles.buttonBlanco} onPress={() => handleEliminar()}>
+            <Text style={styles.buttonBlancoText}>Eliminar dia</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
