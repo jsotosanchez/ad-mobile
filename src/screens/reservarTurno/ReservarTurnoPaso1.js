@@ -78,6 +78,10 @@ export default function ReservarTurnoPaso1({ navigation }) {
   }
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <BurgerMenu navigation={navigation} />
+        <Text style={styles.h1}>Reservar Turno</Text>
+      </View>
       <View style={styles.centered}>
         <Text style={styles.label}>
           Disculpa, parece que tienes una deuda. No puedes pedir una cita hasta que la pagues
