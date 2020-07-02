@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TouchableOpacity, Alert, RefreshControl, ScrollView } from 'react-native';
 import { useGet } from '../../hooks/useFetch';
 import { useOptions } from '../../hooks/useOptions';
 import { fetchDelete } from '../../http/delete';
@@ -12,11 +12,12 @@ import { getSemanaQueViene } from '../../helpers/calendar';
 import moment from 'moment';
 
 export default function EditarAgendaStep2({ route, navigation }) {
-  const { fecha, handleOnRefresh } = route.params;
+  const { fecha } = route.params;
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
-  const { data: turnos } = useGet(urlTurnosDeMedico(userId, fecha), null, options);
+  const [refresh, setRefresh] = useState(0);
+  const { data: turnos, status } = useGet(urlTurnosDeMedico(userId, fecha), refresh, options);
   const handleVerTurnos = () => {
     navigation.navigate('TurnosDelDia', { fecha, turnos });
   };
@@ -38,13 +39,11 @@ export default function EditarAgendaStep2({ route, navigation }) {
               .then(() => {
                 Alert.alert('Se han eliminado todos los turnos exitosamente');
                 handleOnRefresh();
-                navigation.pop();
               })
               .catch(() => {
                 {
                   Alert.alert('Se han eliminado todos los turnos exitosamente');
                   handleOnRefresh();
-                  navigation.pop();
                 }
               }),
         },
@@ -54,13 +53,22 @@ export default function EditarAgendaStep2({ route, navigation }) {
     }
   };
 
+  const handleOnRefresh = () => {
+    setRefresh((prev) => prev + 1);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <BackButton navigation={navigation} />
         <Text style={styles.h1}>Mi Agenda</Text>
       </View>
-      <View style={styles.centered}>
+      <ScrollView
+        style={styles.centered}
+        refreshControl={
+          <RefreshControl refreshing={status === 'LOADING'} onRefresh={handleOnRefresh} title="Cargando..." />
+        }
+      >
         <Text style={styles.labelCentered}>{fecha.slice(0, 10)}</Text>
         <TouchableOpacity style={{ ...styles.buttonBlanco, marginTop: 20 }} onPress={() => handleVerTurnos()}>
           <Text style={styles.buttonBlancoText}>Ver turnos del dia</Text>
@@ -70,7 +78,7 @@ export default function EditarAgendaStep2({ route, navigation }) {
             <Text style={styles.buttonBlancoText}>Eliminar dia</Text>
           </TouchableOpacity>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
