@@ -54,16 +54,16 @@ function UnauthorizedContent() {
 
 function AuthorizedContent({ isMedico }) {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator initialRouteName="Mi Agenda">
       {isMedico ? (
         <>
           <Drawer.Screen name="Mi Agenda" component={EditarAgenaStackNavigation} />
-          <Drawer.Screen name="Cargar Agenda" component={CargarAgenda} />          
+          <Drawer.Screen name="Cargar Agenda" component={CargarAgenda} />
         </>
       ) : (
         <></>
       )}
-      <Drawer.Screen name="Citas medicas" component={Turnos} />
+      <Drawer.Screen name="Citas Medicas" component={Turnos} />
       <Drawer.Screen name="Reservar Turno" component={ReservarTurnoStackNavigation} />
       <Drawer.Screen name="Notificaciones" component={Notificaciones} />
       <Drawer.Screen name="Salir" component={SignOut} />

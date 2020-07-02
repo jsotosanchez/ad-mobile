@@ -7,8 +7,10 @@ import BurgerMenu from '../navigation/BurgerMenu';
 export default function SignOut({ navigation }) {
   const context = useContext(SessionContext);
   const unAuthorize = context.unAuthorize;
+  const isMedico = context.isMedico();
 
   const submit = () => {
+    isMedico ? navigation.navigate('Mi Agenda') : navigation.navigate('Citas Medicas');
     unAuthorize();
   };
 
