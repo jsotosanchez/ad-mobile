@@ -9,68 +9,67 @@ import { Context as SessionContext } from '../../contextComponents/SessionContex
 import BurgerMenu from '../../navigation/BurgerMenu';
 
 const placeholderEspecialidad = {
-  label: 'Selecciona una especialidad',
+  label: 'Cardio...',
   value: null,
 };
 
-export default function ReservarTurnoPaso1({ navigation }) {
+export default function ScheduleAnAppointment({ navigation }) {
   const context = useContext(SessionContext);
   const options = useOptions(context);
-  const pagoAlDia = context.getPagoAlDia();
-  const [especialidad, setEspecialidad] = useState();
-  const { data: especialidades, status } = useGet(urlEspecialidades(), null, options);
+  const userIsDebtFree = context.getPagoAlDia();
+  const [selectedSpecialty, setSelectedSpecialty] = useState();
+  const { data: specialties, status: fetchStatus } = useGet(urlEspecialidades(), null, options);
 
-  const especialidadesPicker = useMemo(
+  const specialtiesPicker = useMemo(
     () =>
-      especialidades.map((e) => ({
+      specialties.map((e) => ({
         label: e.descripcion,
         value: e.id,
       })),
-    [especialidades]
+    [specialties]
   );
 
   function submit() {
-    if (!especialidad) {
-      return Alert.alert('ERROR!', 'Por favor selecciona una especialidad', [{ text: 'OK' }]);
+    if (!selectedSpecialty) {
+      return Alert.alert('Please select a specialty', [{ text: 'OK' }]);
     } else {
-      navigation.navigate('Paso2', { especialidad });
+      navigation.navigate('Step2', { selectedSpecialty });
     }
   }
 
-  const handleEspecialidades = (value) => {
-    setEspecialidad(value);
+  const handleSpecialtiesPicker = (value) => {
+    setSelectedSpecialty(value);
   };
 
-  if (pagoAlDia) {
-    return status === 'LOADING' ? (
+  if (userIsDebtFree) {
+    return fetchStatus === 'LOADING' ? (
       <View style={styles.container}>
         <View style={styles.header}>
           <BurgerMenu navigation={navigation} />
-          <Text style={styles.h1}>Reservar Turno</Text>
+          <Text style={styles.h1}>Schedule Appointment</Text>
         </View>
       </View>
     ) : (
       <View style={styles.container}>
         <View style={styles.header}>
           <BurgerMenu navigation={navigation} />
-          <Text style={styles.h1}>Reservar Turno</Text>
+          <Text style={{ ...styles.headerText, paddingTop: 10 }}>Schedule Appointment</Text>
         </View>
         <View style={styles.centered}>
-          <Text style={styles.label}>Seleccionad una especialidad</Text>
-          {especialidadesPicker && (
+          <Text style={styles.label}>Select a specialty</Text>
+          {specialtiesPicker && (
             <View style={styles.label}>
               <RNPickerSelect
-                onValueChange={handleEspecialidades}
-                items={especialidadesPicker}
+                onValueChange={handleSpecialtiesPicker}
+                items={specialtiesPicker}
                 style={pickerStyle}
-                doneText="Aceptar"
-                value={especialidad}
+                value={selectedSpecialty}
                 placeholder={placeholderEspecialidad}
               />
             </View>
           )}
           <TouchableOpacity style={styles.buttonAzulOscuro} onPress={submit}>
-            <Text style={styles.buttonLogInText}>Siguiente</Text>
+            <Text style={styles.buttonLogInText}>Next</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -80,12 +79,10 @@ export default function ReservarTurnoPaso1({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Reservar Turno</Text>
+        <Text style={styles.h1}>Schedule Appointment</Text>
       </View>
       <View style={styles.centered}>
-        <Text style={styles.label}>
-          Disculpa, parece que tienes una deuda. No puedes pedir una cita hasta que la pagues
-        </Text>
+        <Text style={styles.label}>It seems like you have debt. Please pay it continue using our service.</Text>
       </View>
     </View>
   );

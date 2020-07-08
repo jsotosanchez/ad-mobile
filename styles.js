@@ -41,6 +41,12 @@ export const styles = StyleSheet.create({
     color: blanco,
     fontWeight: 'bold',
   },
+  headerText: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: blanco,
+    fontWeight: 'bold',
+  },
   backButton: {
     fontSize: 15,
     textAlign: 'center',

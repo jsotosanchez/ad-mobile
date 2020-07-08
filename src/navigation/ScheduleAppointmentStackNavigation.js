@@ -1,10 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import ReservarTurnoPaso1 from '../screens/reservarTurno/ReservarTurnoPaso1';
-import AppointmentsOfADay from '../screens/editMySchedule/AppointmentsOfADay';
-import ReservarTurnoPaso2 from '../screens/reservarTurno/ReservarTurnoPaso2';
-import ReservarTurnoPaso3 from '../screens/reservarTurno/ReservarTurnoPaso3';
+import ScheduleAnAppointment from '../screens/scheduleAnAppointment/ScheduleAnAppointment';
+import ScheduleAnAppointment2 from '../screens/scheduleAnAppointment/ScheduleAnAppointment2';
+import ScheduleAnAppointment3 from '../screens/scheduleAnAppointment/ScheduleAnAppointment3';
 import { styles } from '../../styles';
 
 const ScheduleAppointmentNavigation = createStackNavigator();
@@ -12,49 +11,32 @@ const ScheduleAppointmentNavigation = createStackNavigator();
 export const ScheduleAppointmentStackNavigation = () => {
   return (
     <View style={styles.container}>
-      <ScheduleAppointmentNavigation.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <ScheduleAppointmentNavigation.Navigator>
         <ScheduleAppointmentNavigation.Screen
-          name="Reserva de turno"
-          component={ReservarTurnoPaso1}
+          name="ScheduleAppointment"
+          component={ScheduleAnAppointment}
           options={{
-            title: 'Reservar turno',
-            headerStyle: { backgroundColor: '#495867' },
-            headerTitleStyle: styles.h1,
-            headerBackTitle: 'Volver',
+            headerShown: false,
           }}
         />
         <ScheduleAppointmentNavigation.Screen
-          name="Paso2"
-          component={ReservarTurnoPaso2}
+          name="Step2"
+          component={ScheduleAnAppointment2}
           options={{
-            title: 'Reservar Turno',
+            title: 'Schedule Appointment',
             headerStyle: { backgroundColor: '#495867' },
-            headerBackTitle: 'Volver',
-            headerTitleStyle: styles.h1,
+            headerBackTitle: 'Back',
+            headerTitleStyle: styles.headerText,
           }}
         />
         <ScheduleAppointmentNavigation.Screen
-          name="Paso3"
-          component={ReservarTurnoPaso3}
+          name="Step3"
+          component={ScheduleAnAppointment3}
           options={{
-            title: 'Reservar Turno',
+            title: 'Schedule Appointment',
             headerStyle: { backgroundColor: '#495867' },
-            headerBackTitle: 'Volver',
-            headerTitleStyle: styles.h1,
-          }}
-        />
-        <ScheduleAppointmentNavigation.Screen
-          name="TurnosDelDia"
-          component={AppointmentsOfADay}
-          options={{
-            title: 'Turnos',
-            headerStyle: { backgroundColor: '#495867' },
-            headerBackTitle: 'Volver',
-            headerTitleStyle: styles.h1,
+            headerBackTitle: 'Back',
+            headerTitleStyle: styles.headerText,
           }}
         />
       </ScheduleAppointmentNavigation.Navigator>

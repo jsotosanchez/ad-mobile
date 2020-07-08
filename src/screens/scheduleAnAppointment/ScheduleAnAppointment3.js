@@ -9,102 +9,97 @@ import { Calendar } from 'react-native-calendars';
 import { dosMesesAdelante as maxDate, DATEFORMAT } from '../../helpers/calendar';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import { useOptions } from '../../hooks/useOptions';
-import BackButton from '../../navigation/BackButton';
 
-const placeholderHorario = {
-  label: 'Selecciona un horario',
+const timeSlotPlaceholder = {
+  label: 'Select a time',
   value: null,
 };
 
-export default function ReservarTurnoPaso3({ navigation, route }) {
+export default function ScheduleAnAppointment3({ navigation, route }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
-  const { turnosSeleccionados: turnos } = route.params;
-  const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
-  const [fechaTurno, setFechaTurno] = useState(moment().format(DATEFORMAT));
+  const { availableAppointments } = route.params;
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [appointmentDate, setAppointmentDate] = useState(moment().format(DATEFORMAT));
   const hoy = new Date();
 
-  console.log(turnos);
-  // @ts-ignore
-  const diasMarcados = Object.fromEntries(
-    Object.keys(turnos).map((t) => {
+  const markedDays = Object.fromEntries(
+    Object.keys(availableAppointments).map((t) => {
       return [t, { marked: true }];
     })
   );
 
-  const horarios = turnos[fechaTurno];
+  // available appointments is a Map <Date, Appointment>
+  const timeSlotsAvailable = availableAppointments[appointmentDate];
 
-  const horariosPicker = useMemo(
+  const timeSlotPicker = useMemo(
     () =>
-      (horarios || []).map((h) => ({
+      (timeSlotsAvailable || []).map((h) => ({
         label: h.horario.slice(11, 16),
         value: h.id,
       })),
-    [horarios]
+    [timeSlotsAvailable]
   );
 
   function submit() {
-    if (horarioSeleccionado) {
-      fetchPatch(urlReservarTurno(horarioSeleccionado), options, { id: userId }).then((r) => {
+    if (selectedTime) {
+      fetchPatch(urlReservarTurno(selectedTime), options, { id: userId }).then((r) => {
         if (r.status === 403) {
-          // ya posee un turno con esa especialidad ese dia
-          Alert.alert('No puede reservar el turno', r.message);
+          // already has an appointment on that timeslot
+          Alert.alert(`You can't schedule this appointment`, r.message);
           navigation.popToTop();
           return;
         }
-        Alert.alert('Se ha reservado el turno');
+        Alert.alert('You have scheduled your appointment successfully');
         navigation.popToTop();
       });
     } else {
-      Alert.alert('Por favor selecciona un horario');
+      Alert.alert('Please select a time');
     }
   }
 
   const handleDateChange = ({ dateString: date }) => {
-    setFechaTurno(moment(date).format(DATEFORMAT));
+    setAppointmentDate(moment(date).format(DATEFORMAT));
   };
 
   const handleHorarioChange = (horario) => {
-    setHorarioSeleccionado(horario);
+    setSelectedTime(horario);
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <BackButton navigation={navigation} />
-        <Text style={styles.h1}>Reservar Turno</Text>
-      </View>
       <View style={styles.centered}>
-        <Text style={styles.label}>Dia</Text>
+        <Text style={styles.label}>Select a date</Text>
         <View style={styles.calendar}>
           <Calendar
             minDate={hoy}
             maxDate={maxDate}
             onDayPress={handleDateChange}
             markedDates={{
-              ...diasMarcados,
-              [fechaTurno]: {
+              ...markedDays,
+              [appointmentDate]: {
                 selected: true,
               },
             }}
-            current={fechaTurno}
+            current={appointmentDate}
           />
         </View>
-        <Text style={styles.label}>{horarios ? 'Horarios' : 'No hay turnos ese dia'}</Text>
+        <Text style={styles.label}>
+          {timeSlotsAvailable ? 'Available times' : `There is no available appointments that date`}
+        </Text>
         <View style={styles.label}>
           <RNPickerSelect
             onValueChange={handleHorarioChange}
-            items={horariosPicker}
+            items={timeSlotPicker}
             style={pickerStyle}
-            doneText="Aceptar"
-            value={horarioSeleccionado}
-            placeholder={placeholderHorario}
-            disabled={!horarios}
+            value={selectedTime}
+            placeholder={timeSlotPlaceholder}
+            disabled={!timeSlotsAvailable}
           />
         </View>
         <TouchableOpacity style={styles.buttonAzulOscuro} onPress={submit}>
-          <Text style={styles.buttonLogInText}>Reservar</Text>
+          <Text style={styles.buttonLogInText}>Confirm</Text>
         </TouchableOpacity>
       </View>
     </View>
