@@ -3,7 +3,7 @@ import { azulClarito, blanco, azulOscuro } from '../../styles';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import Turnos from '../screens/turnos/Turnos';
+import MyAppointments from '../screens/myAppointments/MyAppointments';
 import SignIn from '../screens/SignIn';
 import SetMySchedule from '../screens/SetMySchedule';
 import Notifications from '../screens/notifications/Notifications';
@@ -64,7 +64,7 @@ function AuthorizedContent({ isMedic }) {
         <></>
       )}
       <Drawer.Screen name="Schedule an appointment" component={ScheduleAppointmentStackNavigation} />
-      <Drawer.Screen name="My appointments" component={Turnos} />
+      <Drawer.Screen name="My appointments" component={MyAppointments} />
       <Drawer.Screen name="Notifications" component={Notifications} />
       <Drawer.Screen name="Sign out" component={SignOut} />
     </Drawer.Navigator>
