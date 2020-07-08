@@ -41,7 +41,13 @@ export const styles = StyleSheet.create({
     color: blanco,
     fontWeight: 'bold',
     paddingTop: 15,
-    paddingLeft: 30,
+    paddingLeft: 45,
+  },
+  headerTextForStackNavs: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: blanco,
+    fontWeight: 'bold',
   },
   backButton: {
     fontSize: 15,

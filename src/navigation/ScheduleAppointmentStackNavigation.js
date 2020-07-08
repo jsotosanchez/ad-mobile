@@ -26,7 +26,7 @@ export const ScheduleAppointmentStackNavigation = () => {
             title: 'Schedule Appointment',
             headerStyle: { backgroundColor: '#495867' },
             headerBackTitle: 'Back',
-            headerTitleStyle: styles.headerText,
+            headerTitleStyle: styles.headerTextForStackNavs,
           }}
         />
         <ScheduleAppointmentNavigation.Screen
@@ -36,7 +36,7 @@ export const ScheduleAppointmentStackNavigation = () => {
             title: 'Schedule Appointment',
             headerStyle: { backgroundColor: '#495867' },
             headerBackTitle: 'Back',
-            headerTitleStyle: styles.headerText,
+            headerTitleStyle: styles.headerTextForStackNavs,
           }}
         />
       </ScheduleAppointmentNavigation.Navigator>

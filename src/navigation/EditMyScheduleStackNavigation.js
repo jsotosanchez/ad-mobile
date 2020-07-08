@@ -26,7 +26,7 @@ export const EditMyScheduleStackNavigation = () => {
             title: 'Edit Schedule',
             headerStyle: { backgroundColor: '#495867' },
             headerBackTitle: 'Back',
-            headerTitleStyle: styles.headerText,
+            headerTitleStyle: styles.headerTextForStackNavs,
           }}
         />
         <EditMyScheduleNavigation.Screen
@@ -36,7 +36,7 @@ export const EditMyScheduleStackNavigation = () => {
             title: 'Appointments',
             headerStyle: { backgroundColor: '#495867' },
             headerBackTitle: 'Back',
-            headerTitleStyle: styles.headerText,
+            headerTitleStyle: styles.headerTextForStackNavs,
           }}
         />
       </EditMyScheduleNavigation.Navigator>
