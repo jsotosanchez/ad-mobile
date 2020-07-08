@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReservarTurnoPaso1 from '../screens/reservarTurno/ReservarTurnoPaso1';
-import AppointmentsOfADay from '../screens/editarAgenda/AppointmentsOfADay';
+import AppointmentsOfADay from '../screens/editMySchedule/AppointmentsOfADay';
 import ReservarTurnoPaso2 from '../screens/reservarTurno/ReservarTurnoPaso2';
 import ReservarTurnoPaso3 from '../screens/reservarTurno/ReservarTurnoPaso3';
 import { styles } from '../../styles';

@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Turnos from '../screens/turnos/Turnos';
 import SignIn from '../screens/SignIn';
 import SetMySchedule from '../screens/SetMySchedule';
-import Notifications from '../screens/notificaciones/Notifications';
+import Notifications from '../screens/notifications/Notifications';
 import { EditMyScheduleStackNavigation } from './EditMyScheduleStackNavigation';
 import { ScheduleAppointmentStackNavigation } from './ScheduleAppointmentStackNavigation';
 import { Context as SessionContext } from '../contextComponents/SessionContext';

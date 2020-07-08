@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import EditMySchedule from '../screens/editarAgenda/EditMySchedule';
-import EditMyScheduleStep2 from '../screens/editarAgenda/EditMyScheduleStep2';
+import EditMySchedule from '../screens/editMySchedule/EditMySchedule';
+import EditMyScheduleStep2 from '../screens/editMySchedule/EditMyScheduleStep2';
 import { styles } from '../../styles';
-import AppointmentsOfADay from '../screens/editarAgenda/AppointmentsOfADay';
+import AppointmentsOfADay from '../screens/editMySchedule/AppointmentsOfADay';
 
 const EditMyScheduleNavigation = createStackNavigator();
 
