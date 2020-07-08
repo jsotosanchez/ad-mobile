@@ -8,7 +8,7 @@ import SignIn from '../screens/SignIn';
 import CargarAgenda from '../screens/CargarAgenda';
 import Notificaciones from '../screens/notificaciones/Notificaciones';
 import { EditarAgenaStackNavigation } from './EditarAgendaStackNavigation';
-import { ReservarTurnoStackNavigation } from './ReservarTurnosStackNavigation';
+import { ScheduleAppointmentStackNavigation } from './ScheduleAppointmentStackNavigation';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
 import SignOut from '../screens/SignOut';
 
@@ -63,7 +63,7 @@ function AuthorizedContent({ isMedic }) {
       ) : (
         <></>
       )}
-      <Drawer.Screen name="Schedule an appointment" component={ReservarTurnoStackNavigation} />
+      <Drawer.Screen name="Schedule an appointment" component={ScheduleAppointmentStackNavigation} />
       <Drawer.Screen name="My appointments" component={Turnos} />
       <Drawer.Screen name="Notifications" component={Notificaciones} />
       <Drawer.Screen name="Sign out" component={SignOut} />

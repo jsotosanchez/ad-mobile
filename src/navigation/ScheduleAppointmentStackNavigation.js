@@ -7,17 +7,17 @@ import ReservarTurnoPaso2 from '../screens/reservarTurno/ReservarTurnoPaso2';
 import ReservarTurnoPaso3 from '../screens/reservarTurno/ReservarTurnoPaso3';
 import { styles } from '../../styles';
 
-const ReservarTurnoNavigation = createStackNavigator();
+const ScheduleAppointmentNavigation = createStackNavigator();
 
-export const ReservarTurnoStackNavigation = () => {
+export const ScheduleAppointmentStackNavigation = () => {
   return (
     <View style={styles.container}>
-      <ReservarTurnoNavigation.Navigator
+      <ScheduleAppointmentNavigation.Navigator
         screenOptions={{
           headerShown: false,
         }}
       >
-        <ReservarTurnoNavigation.Screen
+        <ScheduleAppointmentNavigation.Screen
           name="Reserva de turno"
           component={ReservarTurnoPaso1}
           options={{
@@ -27,7 +27,7 @@ export const ReservarTurnoStackNavigation = () => {
             headerBackTitle: 'Volver',
           }}
         />
-        <ReservarTurnoNavigation.Screen
+        <ScheduleAppointmentNavigation.Screen
           name="Paso2"
           component={ReservarTurnoPaso2}
           options={{
@@ -37,7 +37,7 @@ export const ReservarTurnoStackNavigation = () => {
             headerTitleStyle: styles.h1,
           }}
         />
-        <ReservarTurnoNavigation.Screen
+        <ScheduleAppointmentNavigation.Screen
           name="Paso3"
           component={ReservarTurnoPaso3}
           options={{
@@ -47,7 +47,7 @@ export const ReservarTurnoStackNavigation = () => {
             headerTitleStyle: styles.h1,
           }}
         />
-        <ReservarTurnoNavigation.Screen
+        <ScheduleAppointmentNavigation.Screen
           name="TurnosDelDia"
           component={TurnosDelDia}
           options={{
@@ -57,7 +57,7 @@ export const ReservarTurnoStackNavigation = () => {
             headerTitleStyle: styles.h1,
           }}
         />
-      </ReservarTurnoNavigation.Navigator>
+      </ScheduleAppointmentNavigation.Navigator>
     </View>
   );
 };
