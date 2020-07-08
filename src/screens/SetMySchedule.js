@@ -126,7 +126,6 @@ export default function SetMySchedule({ navigation }) {
                 onValueChange={handleSpecialties}
                 items={specialtiesPicker}
                 style={pickerStyle}
-                doneText="Aceptar"
                 value={selectedSpecialty}
                 placeholder={placeholderEspecialidad}
               />
