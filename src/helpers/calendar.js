@@ -13,7 +13,7 @@ export const twoMonthsLater = getTwoMonthsLater();
 export const nextMonth = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1);
 
 export const getNextWeek = () => {
-  const dayINeed = 1; //lunes
+  const dayINeed = 1; //monday
   return moment().add(1, 'weeks').isoWeekday(dayINeed).add(-1, 'day');
 };
 
