@@ -6,17 +6,17 @@ import EditarAgendaStep2 from '../screens/editarAgenda/EditarAgendaStep2';
 import { styles } from '../../styles';
 import TurnosDelDia from '../screens/editarAgenda/TurnosDelDia';
 
-const EditarAgendaNavigation = createStackNavigator();
+const EditMyScheduleNavigation = createStackNavigator();
 
-export const EditarAgenaStackNavigation = () => {
+export const EditMyScheduleStackNavigation = () => {
   return (
     <View style={styles.container}>
-      <EditarAgendaNavigation.Navigator
+      <EditMyScheduleNavigation.Navigator
         screenOptions={{
           headerShown: false,
         }}
       >
-        <EditarAgendaNavigation.Screen
+        <EditMyScheduleNavigation.Screen
           name="Edit Schedule"
           component={EditarAgenda}
           options={{
@@ -26,7 +26,7 @@ export const EditarAgenaStackNavigation = () => {
             headerBackTitle: 'Back',
           }}
         />
-        <EditarAgendaNavigation.Screen
+        <EditMyScheduleNavigation.Screen
           name="Edit Schedule Step2"
           component={EditarAgendaStep2}
           options={{
@@ -36,7 +36,7 @@ export const EditarAgenaStackNavigation = () => {
             headerTitleStyle: styles.h1,
           }}
         />
-        <EditarAgendaNavigation.Screen
+        <EditMyScheduleNavigation.Screen
           name="AppointmentsOfADay"
           component={TurnosDelDia}
           options={{
@@ -46,7 +46,7 @@ export const EditarAgenaStackNavigation = () => {
             headerTitleStyle: styles.h1,
           }}
         />
-      </EditarAgendaNavigation.Navigator>
+      </EditMyScheduleNavigation.Navigator>
     </View>
   );
 };
