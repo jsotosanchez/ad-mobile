@@ -31,8 +31,7 @@ export default function ScheduleAnAppointment({ navigation }) {
 
   function submit() {
     if (!selectedSpecialty) {
-      console.log('no hay specialty', selectedSpecialty);
-      Alert.alert('Please select a specialty', [{ text: 'OK' }]);
+      Alert.alert('Please select a specialty');
       return;
     } else {
       navigation.navigate('Step2', { selectedSpecialty });
