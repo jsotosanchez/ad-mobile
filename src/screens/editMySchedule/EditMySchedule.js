@@ -17,7 +17,7 @@ export default function EditMySchedule({ navigation }) {
   const options = useOptions(context);
   const [selectedDate, setSelectedDate] = useState(null);
   const [refresh, setRefresh] = useState(0);
-  const { data: daysWithAppointments, status } = useGet(urlDiasPorMedico(userId), refresh, options);
+  const { data: daysWithAppointments, fetchStatus } = useGet(urlDiasPorMedico(userId), refresh, options);
 
   const handleOnDateChange = ({ dateString: date }) => {
     setSelectedDate(moment(date).format(DATEFORMAT));
@@ -56,7 +56,7 @@ export default function EditMySchedule({ navigation }) {
       <ScrollView
         style={styles.container}
         refreshControl={
-          <RefreshControl refreshing={status === 'LOADING'} onRefresh={handleOnRefresh} title="Loading..." />
+          <RefreshControl refreshing={fetchStatus === 'LOADING'} onRefresh={handleOnRefresh} title="Loading..." />
         }
       >
         <View style={styles.centered}>

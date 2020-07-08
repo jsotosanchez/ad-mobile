@@ -18,7 +18,7 @@ export default function ScheduleAnAppointment({ navigation }) {
   const options = useOptions(context);
   const userIsDebtFree = context.getPagoAlDia();
   const [selectedSpecialty, setSelectedSpecialty] = useState();
-  const { data: specialties, status: fetchStatus } = useGet(urlEspecialidades(), null, options);
+  const { data: specialties, fetchStatus } = useGet(urlEspecialidades(), null, options);
 
   const specialtiesPicker = useMemo(
     () =>

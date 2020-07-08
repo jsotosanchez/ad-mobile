@@ -17,7 +17,7 @@ export default function EditMyScheduleStep2({ route, navigation }) {
   const userId = context.getUserId();
   const options = useOptions(context);
   const [refresh, setRefresh] = useState(0);
-  const { data: appointments, status: fetchStatus } = useGet(urlTurnosDeMedico(userId, selectedDate), refresh, options);
+  const { data: appointments, fetchStatus } = useGet(urlTurnosDeMedico(userId, selectedDate), refresh, options);
 
   const handleSeeAppointments = () => {
     navigation.navigate('AppointmentsOfADay', { selectedDate, appointments });

@@ -21,7 +21,7 @@ export default function MyAppointments({ navigation }) {
   const userId = context.getUserId();
   const options = useOptions(context);
   const [refresh, setRefresh] = useState(0);
-  const { data: appointments, status: fetchStatus } = useGet(urlTurnosDePaciente(userId), refresh, options);
+  const { data: appointments, fetchStatus } = useGet(urlTurnosDePaciente(userId), refresh, options);
 
   const todaysDate = new Date();
 

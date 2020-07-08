@@ -21,11 +21,7 @@ export default function ScheduleAnAppointment2({ navigation, route }) {
   const { selectedSpecialty } = route.params;
   const [selectedMedic, setSelectedMedic] = useState();
   const { data: medics } = useGet(urlMedicosPorEspecialidad(selectedSpecialty), null, options);
-  const { data: availableAppointments, status: fetchStatus } = useGet(
-    urlTurnosDisponibles(selectedSpecialty),
-    null,
-    options
-  );
+  const { data: availableAppointments, fetchStatus } = useGet(urlTurnosDisponibles(selectedSpecialty), null, options);
 
   const medicsPicker = useMemo(() => medics.map((m) => ({ label: m.nombre, value: m.id })), [medics]);
 

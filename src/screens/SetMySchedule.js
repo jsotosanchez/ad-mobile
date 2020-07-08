@@ -26,7 +26,7 @@ export default function SetMySchedule({ navigation }) {
   const options = useOptions(context);
   const [refresh, setRefresh] = useState(0);
   const { data: specialties } = useGet(urlEspecialidadesDeMedico(userId), null, options);
-  const { data: loadedDays, status: lodadedDaysFetchStatus } = useGet(urlDiasPorMedico(userId), refresh, options);
+  const { data: loadedDays, fetchStatus: lodadedDaysFetchStatus } = useGet(urlDiasPorMedico(userId), refresh, options);
   const datesAreValid = loadedDays.find((d) => moment(startingDate).isBefore(d) && moment(endingDate).isAfter(d));
   const allFieldsHaveData = selectedSpecialty && startingDate && endingDate && startingTime && endingTime;
 

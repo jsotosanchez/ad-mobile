@@ -19,7 +19,7 @@ export default function Notifications({ navigation }) {
     navigation.navigate('Reservar Turno');
   };
 
-  const { data: notifications, status } = useGet(urlNotificacionesDeUsuario(userId), refresh, options);
+  const { data: notifications, fetchStatus } = useGet(urlNotificacionesDeUsuario(userId), refresh, options);
 
   const markAsRead = (id) => {
     fetchPatch(urlMarcarNotificacionLeida(id), options);
@@ -47,7 +47,7 @@ export default function Notifications({ navigation }) {
           />
         )}
         keyExtractor={(item) => String(item.id)}
-        refreshing={status === 'LOADING'}
+        refreshing={fetchStatus === 'LOADING'}
         onRefresh={() => {
           onRefresh();
         }}
