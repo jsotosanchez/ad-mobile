@@ -35,10 +35,6 @@ export default function AppointmentsOfADay({ route, navigation }) {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <BackButton navigation={navigation} />
-        <Text style={styles.h1}>Appointments</Text>
-      </View>
       <FlatList
         data={appointments}
         renderItem={({ item }) => (

@@ -25,7 +25,6 @@ export default function EditMyScheduleStep2({ route, navigation }) {
 
   const dateIsEditable = moment(selectedDate).isAfter(getSemanaQueViene());
   const havePatients = appointments.filter((t) => t.paciente).length > 0;
-  console.log(appointments);
   const handleDeleteAll = () => {
     if (havePatients) {
       Alert.alert(`You can't delete the whole day because you already have patients`);
@@ -62,10 +61,6 @@ export default function EditMyScheduleStep2({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <BackButton navigation={navigation} />
-        <Text style={styles.h1}>My Schedule</Text>
-      </View>
       <ScrollView
         style={styles.centered}
         refreshControl={

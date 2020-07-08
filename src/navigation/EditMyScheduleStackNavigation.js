@@ -11,19 +11,12 @@ const EditMyScheduleNavigation = createStackNavigator();
 export const EditMyScheduleStackNavigation = () => {
   return (
     <View style={styles.container}>
-      <EditMyScheduleNavigation.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <EditMyScheduleNavigation.Navigator>
         <EditMyScheduleNavigation.Screen
           name="Edit Schedule"
           component={EditMySchedule}
           options={{
-            title: 'Edit Schedule',
-            headerStyle: { backgroundColor: '#495867' },
-            headerTitleStyle: styles.h1,
-            headerBackTitle: 'Back',
+            headerShown: false,
           }}
         />
         <EditMyScheduleNavigation.Screen
@@ -33,7 +26,7 @@ export const EditMyScheduleStackNavigation = () => {
             title: 'Edit Schedule',
             headerStyle: { backgroundColor: '#495867' },
             headerBackTitle: 'Back',
-            headerTitleStyle: styles.h1,
+            headerTitleStyle: styles.headerText,
           }}
         />
         <EditMyScheduleNavigation.Screen
@@ -43,7 +36,7 @@ export const EditMyScheduleStackNavigation = () => {
             title: 'Appointments',
             headerStyle: { backgroundColor: '#495867' },
             headerBackTitle: 'Back',
-            headerTitleStyle: styles.h1,
+            headerTitleStyle: styles.headerText,
           }}
         />
       </EditMyScheduleNavigation.Navigator>
