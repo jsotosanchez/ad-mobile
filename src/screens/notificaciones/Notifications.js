@@ -5,23 +5,23 @@ import { useOptions } from '../../hooks/useOptions';
 import { fetchPatch } from '../../http/patch';
 import { urlNotificacionesDeUsuario, urlMarcarNotificacionLeida } from '../../config/urls';
 import { styles } from '../../../styles';
-import Notificacion from './Notificacion';
+import NotificationListItem from './NotificationListItem';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import BurgerMenu from '../../navigation/BurgerMenu';
 
-export default function Notificaciones({ navigation }) {
+export default function Notifications({ navigation }) {
   const [refresh, setRefresh] = useState(0);
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
 
-  const irACartillaMedica = () => {
+  const navigateToScheduleAppointment = () => {
     navigation.navigate('Reservar Turno');
   };
 
-  const { data: notificaciones, status } = useGet(urlNotificacionesDeUsuario(userId), refresh, options);
+  const { data: notifications, status } = useGet(urlNotificacionesDeUsuario(userId), refresh, options);
 
-  const marcarLeida = (id) => {
+  const markAsRead = (id) => {
     fetchPatch(urlMarcarNotificacionLeida(id), options);
     onRefresh();
   };
@@ -34,16 +34,16 @@ export default function Notificaciones({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Notificaciones</Text>
+        <Text style={styles.h1}>Notifications</Text>
       </View>
       <FlatList
-        data={notificaciones}
+        data={notifications}
         renderItem={({ item }) => (
-          <Notificacion
+          <NotificationListItem
             id={item.id}
             data={item.mensaje}
-            irACartillaMedica={irACartillaMedica}
-            marcarLeida={marcarLeida}
+            navigateToScheduleAppointment={navigateToScheduleAppointment}
+            markAsRead={markAsRead}
           />
         )}
         keyExtractor={(item) => String(item.id)}

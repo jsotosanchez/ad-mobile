@@ -5,8 +5,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import Turnos from '../screens/turnos/Turnos';
 import SignIn from '../screens/SignIn';
-import CargarAgenda from '../screens/CargarAgenda';
-import Notificaciones from '../screens/notificaciones/Notificaciones';
+import SetMySchedule from '../screens/SetMySchedule';
+import Notifications from '../screens/notificaciones/Notifications';
 import { EditMyScheduleStackNavigation } from './EditMyScheduleStackNavigation';
 import { ScheduleAppointmentStackNavigation } from './ScheduleAppointmentStackNavigation';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
@@ -58,14 +58,14 @@ function AuthorizedContent({ isMedic }) {
       {isMedic ? (
         <>
           <Drawer.Screen name="My Schedule" component={EditMyScheduleStackNavigation} />
-          <Drawer.Screen name="Set my schedule" component={CargarAgenda} />
+          <Drawer.Screen name="Set my schedule" component={SetMySchedule} />
         </>
       ) : (
         <></>
       )}
       <Drawer.Screen name="Schedule an appointment" component={ScheduleAppointmentStackNavigation} />
       <Drawer.Screen name="My appointments" component={Turnos} />
-      <Drawer.Screen name="Notifications" component={Notificaciones} />
+      <Drawer.Screen name="Notifications" component={Notifications} />
       <Drawer.Screen name="Sign out" component={SignOut} />
     </Drawer.Navigator>
   );
