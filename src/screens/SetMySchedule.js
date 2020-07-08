@@ -135,7 +135,6 @@ export default function SetMySchedule({ navigation }) {
           <Text style={styles.label}>Dates</Text>
           <View style={styles.calendar}>
             <CalendarPicker
-              // @ts-ignore
               onDateChange={(date, type) => handleDateChange(date, type)}
               minDate={mesQueViene}
               maxDate={dosMesesAdelante}
