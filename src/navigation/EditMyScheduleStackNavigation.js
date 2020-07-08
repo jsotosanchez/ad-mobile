@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import EditarAgenda from '../screens/editarAgenda/EditarAgenda';
-import EditarAgendaStep2 from '../screens/editarAgenda/EditarAgendaStep2';
+import EditMySchedule from '../screens/editarAgenda/EditMySchedule';
+import EditMyScheduleStep2 from '../screens/editarAgenda/EditMyScheduleStep2';
 import { styles } from '../../styles';
-import TurnosDelDia from '../screens/editarAgenda/TurnosDelDia';
+import AppointmentsOfADay from '../screens/editarAgenda/AppointmentsOfADay';
 
 const EditMyScheduleNavigation = createStackNavigator();
 
@@ -18,7 +18,7 @@ export const EditMyScheduleStackNavigation = () => {
       >
         <EditMyScheduleNavigation.Screen
           name="Edit Schedule"
-          component={EditarAgenda}
+          component={EditMySchedule}
           options={{
             title: 'Edit Schedule',
             headerStyle: { backgroundColor: '#495867' },
@@ -28,7 +28,7 @@ export const EditMyScheduleStackNavigation = () => {
         />
         <EditMyScheduleNavigation.Screen
           name="Edit Schedule Step2"
-          component={EditarAgendaStep2}
+          component={EditMyScheduleStep2}
           options={{
             title: 'Edit Schedule',
             headerStyle: { backgroundColor: '#495867' },
@@ -38,7 +38,7 @@ export const EditMyScheduleStackNavigation = () => {
         />
         <EditMyScheduleNavigation.Screen
           name="AppointmentsOfADay"
-          component={TurnosDelDia}
+          component={AppointmentsOfADay}
           options={{
             title: 'Appointments',
             headerStyle: { backgroundColor: '#495867' },

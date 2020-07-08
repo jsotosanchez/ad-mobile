@@ -11,36 +11,36 @@ import { Context as SessionContext } from '../../contextComponents/SessionContex
 import BurgerMenu from '../../navigation/BurgerMenu';
 import { ScrollView } from 'react-native-gesture-handler';
 
-export default function EditarAgenda({ navigation }) {
+export default function EditMySchedule({ navigation }) {
   const context = useContext(SessionContext);
   const userId = context.getUserId();
   const options = useOptions(context);
-  const [fecha, setFecha] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [refresh, setRefresh] = useState(0);
-  const { data: diasCargados, status } = useGet(urlDiasPorMedico(userId), refresh, options);
+  const { data: daysWithAppointments, status } = useGet(urlDiasPorMedico(userId), refresh, options);
 
   const handleOnDateChange = ({ dateString: date }) => {
-    setFecha(moment(date).format(DATEFORMAT));
+    setSelectedDate(moment(date).format(DATEFORMAT));
   };
 
-  const hoy = new Date();
+  const today = new Date();
 
-  const diasAMarcar = useMemo(
+  const markedDays = useMemo(
     () =>
       Object.fromEntries(
-        diasCargados.map((t) => {
+        daysWithAppointments.map((t) => {
           return [t, { marked: true }];
         })
       ),
-    [diasCargados, refresh]
+    [daysWithAppointments, refresh]
   );
 
   const handleNavigation = () => {
-    if (!fecha) {
-      Alert.alert('Por favor selecciona una fecha');
+    if (!selectedDate) {
+      Alert.alert('You must select a date first');
       return;
     }
-    navigation.navigate('Edit Schedule Step2', { fecha, handleOnRefresh });
+    navigation.navigate('Edit Schedule Step2', { selectedDate, handleOnRefresh });
   };
 
   const handleOnRefresh = () => {
@@ -51,31 +51,31 @@ export default function EditarAgenda({ navigation }) {
     <>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Mi Agenda</Text>
+        <Text style={styles.h1}>My Schedule</Text>
       </View>
       <ScrollView
         style={styles.container}
         refreshControl={
-          <RefreshControl refreshing={status === 'LOADING'} onRefresh={handleOnRefresh} title="Cargando..." />
+          <RefreshControl refreshing={status === 'LOADING'} onRefresh={handleOnRefresh} title="Loading..." />
         }
       >
         <View style={styles.centered}>
-          <Text style={styles.label}>Selecciona una fecha</Text>
+          <Text style={styles.label}>Select a date</Text>
           <View style={styles.calendar}>
             <Calendar
-              minDate={hoy}
+              minDate={today}
               maxDate={dosMesesAdelante}
               onDayPress={handleOnDateChange}
               markedDates={{
-                ...diasAMarcar,
-                [fecha]: {
+                ...markedDays,
+                [selectedDate]: {
                   selected: true,
                 },
               }}
             />
           </View>
           <TouchableOpacity style={styles.buttonAzulOscuro} onPress={() => handleNavigation()}>
-            <Text style={styles.buttonLogInText}>Siguiente</Text>
+            <Text style={styles.buttonLogInText}>Next</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

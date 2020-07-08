@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, FlatList, Alert, Text } from 'react-native';
-import TurnoDoctor from './TurnoDoctor';
+import MedicAppointment from './MedicAppointment';
 import { fetchDelete } from '../../http/delete';
 import { urlBorrarTurno } from '../../config/urls';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
@@ -8,25 +8,25 @@ import { useOptions } from '../../hooks/useOptions';
 import BackButton from '../../navigation/BackButton';
 import { styles } from '../../../styles';
 
-export default function TurnosDelDia({ route, navigation }) {
-  const [turnos, setTurnos] = useState(route.params.turnos);
+export default function AppointmentsOfADay({ route, navigation }) {
+  const [appointments, setAppointments] = useState(route.params.appointments);
   const context = useContext(SessionContext);
   const options = useOptions(context);
 
-  const borrarTurno = (id) => {
+  const deleteAppointment = (id) => {
     Alert.alert(
-      'Está seguro?',
-      'Si cancela el turno no se puede deshacer la acción',
+      'Are you sure?',
+      `You can't undo this action`,
       [
         {
-          text: 'Regresar',
+          text: 'Back',
           style: 'cancel',
         },
         {
-          text: 'Aceptar',
+          text: 'Accept',
           onPress: () => {
             fetchDelete(urlBorrarTurno(id), options);
-            setTurnos((prev) => prev.filter((t) => t.id !== id));
+            setAppointments((prev) => prev.filter((t) => t.id !== id));
           },
         },
       ],
@@ -37,18 +37,18 @@ export default function TurnosDelDia({ route, navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <BackButton navigation={navigation} />
-        <Text style={styles.h1}>Turnos del dia</Text>
+        <Text style={styles.h1}>Appointments</Text>
       </View>
       <FlatList
-        data={turnos}
+        data={appointments}
         renderItem={({ item }) => (
-          <TurnoDoctor
-            especialidad={item.especialidad}
+          <MedicAppointment
+            specialty={item.especialidad}
             id={item.id}
-            horario={item.horario}
-            confirmado={item.confirmado}
-            paciente={item.paciente}
-            borrarTurno={borrarTurno}
+            hour={item.horario}
+            confirmed={item.confirmado}
+            patient={item.paciente}
+            deleteAppointment={deleteAppointment}
           />
         )}
         keyExtractor={(item) => String(item.id)}

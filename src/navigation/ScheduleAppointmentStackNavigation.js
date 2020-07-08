@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReservarTurnoPaso1 from '../screens/reservarTurno/ReservarTurnoPaso1';
-import TurnosDelDia from '../screens/editarAgenda/TurnosDelDia';
+import AppointmentsOfADay from '../screens/editarAgenda/AppointmentsOfADay';
 import ReservarTurnoPaso2 from '../screens/reservarTurno/ReservarTurnoPaso2';
 import ReservarTurnoPaso3 from '../screens/reservarTurno/ReservarTurnoPaso3';
 import { styles } from '../../styles';
@@ -49,7 +49,7 @@ export const ScheduleAppointmentStackNavigation = () => {
         />
         <ScheduleAppointmentNavigation.Screen
           name="TurnosDelDia"
-          component={TurnosDelDia}
+          component={AppointmentsOfADay}
           options={{
             title: 'Turnos',
             headerStyle: { backgroundColor: '#495867' },
