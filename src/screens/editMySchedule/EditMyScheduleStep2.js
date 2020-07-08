@@ -8,7 +8,7 @@ import { styles } from '../../../styles';
 import { urlBorrarTurnosPorDia } from '../../config/urls';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import BackButton from '../../navigation/BackButton';
-import { getSemanaQueViene } from '../../helpers/calendar';
+import { getNextWeek } from '../../helpers/calendar';
 import moment from 'moment';
 
 export default function EditMyScheduleStep2({ route, navigation }) {
@@ -23,7 +23,7 @@ export default function EditMyScheduleStep2({ route, navigation }) {
     navigation.navigate('AppointmentsOfADay', { selectedDate, appointments });
   };
 
-  const dateIsEditable = moment(selectedDate).isAfter(getSemanaQueViene());
+  const dateIsEditable = moment(selectedDate).isAfter(getNextWeek());
   const havePatients = appointments.filter((t) => t.paciente).length > 0;
   const handleDeleteAll = () => {
     if (havePatients) {

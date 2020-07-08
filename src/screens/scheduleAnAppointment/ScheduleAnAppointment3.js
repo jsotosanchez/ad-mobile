@@ -6,7 +6,7 @@ import moment from 'moment';
 import { fetchPatch } from '../../http/patch';
 import { urlReservarTurno } from '../../config/urls';
 import { Calendar } from 'react-native-calendars';
-import { dosMesesAdelante as maxDate, DATEFORMAT } from '../../helpers/calendar';
+import { twoMonthsLater as maxDate, DATEFORMAT } from '../../helpers/calendar';
 import { Context as SessionContext } from '../../contextComponents/SessionContext';
 import { useOptions } from '../../hooks/useOptions';
 

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert, RefreshControl } from 'react-native';
 import { styles } from '../../../styles';
 import { Calendar } from 'react-native-calendars';
-import { dosMesesAdelante, DATEFORMAT } from '../../helpers/calendar';
+import { twoMonthsLater, DATEFORMAT } from '../../helpers/calendar';
 import { useGet } from '../../hooks/useFetch';
 import { useOptions } from '../../hooks/useOptions';
 import { urlDiasPorMedico } from '../../config/urls';
@@ -64,7 +64,7 @@ export default function EditMySchedule({ navigation }) {
           <View style={styles.calendar}>
             <Calendar
               minDate={today}
-              maxDate={dosMesesAdelante}
+              maxDate={twoMonthsLater}
               onDayPress={handleOnDateChange}
               markedDates={{
                 ...markedDays,

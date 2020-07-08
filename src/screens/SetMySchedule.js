@@ -8,7 +8,7 @@ import { useOptions } from '../hooks/useOptions';
 import { Context as SessionContext } from '../contextComponents/SessionContext';
 import moment from 'moment';
 import { styles, pickerStyle } from '../../styles';
-import { dosMesesAdelante, months, weekdays, mesQueViene } from '../helpers/calendar';
+import { twoMonthsLater, months, weekdays, nextMonth } from '../helpers/calendar';
 import { placeholderEspecialidad, placeholderHora } from '../helpers/pickers';
 import { fetchPost } from '../http/post';
 import BurgerMenu from '../navigation/BurgerMenu';
@@ -135,12 +135,12 @@ export default function SetMySchedule({ navigation }) {
           <View style={styles.calendar}>
             <CalendarPicker
               onDateChange={(date, type) => handleDateChange(date, type)}
-              minDate={mesQueViene}
-              maxDate={dosMesesAdelante}
+              minDate={nextMonth}
+              maxDate={twoMonthsLater}
               width={300}
               allowRangeSelection={true}
               selectedDayColor="#00AEF5"
-              initialDate={mesQueViene}
+              initialDate={nextMonth}
               disabledDates={loadedDays}
             />
           </View>

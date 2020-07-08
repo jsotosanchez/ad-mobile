@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from '../../../styles';
-import { getSemanaQueViene } from '../../helpers/calendar';
+import { getNextWeek } from '../../helpers/calendar';
 import moment from 'moment';
 
 export default function MedicAppointment({ id, patient, hour, confirmed, specialty, deleteAppointment }) {
-  const disabled = moment(hour).isBefore(getSemanaQueViene());
+  const disabled = moment(hour).isBefore(getNextWeek());
   return (
     <View style={styles.turno}>
       <Text style={styles.label}>Time: {hour.slice(11, 16)}</Text>
