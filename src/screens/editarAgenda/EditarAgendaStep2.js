@@ -19,7 +19,7 @@ export default function EditarAgendaStep2({ route, navigation }) {
   const [refresh, setRefresh] = useState(0);
   const { data: turnos, status } = useGet(urlTurnosDeMedico(userId, fecha), refresh, options);
   const handleVerTurnos = () => {
-    navigation.navigate('TurnosDelDia', { fecha, turnos });
+    navigation.navigate('AppointmentsOfADay', { fecha, turnos });
   };
 
   const fechaEsModificable = moment(fecha).isAfter(getSemanaQueViene());

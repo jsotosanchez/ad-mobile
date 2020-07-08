@@ -10,7 +10,7 @@ export default class AuthenticationErrorBoundary extends Component {
   }
 
   static getDerivedStateFromError(_error) {
-    // Update state so the next render will show the fallback UI.
+    // copied from react docs, not 100% why it's needed
     return { hasError: true };
   }
 

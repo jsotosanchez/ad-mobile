@@ -17,32 +17,32 @@ export const EditarAgenaStackNavigation = () => {
         }}
       >
         <EditarAgendaNavigation.Screen
-          name="Editar Agenda"
+          name="Edit Schedule"
           component={EditarAgenda}
           options={{
-            title: 'Editar Agenda',
+            title: 'Edit Schedule',
             headerStyle: { backgroundColor: '#495867' },
             headerTitleStyle: styles.h1,
-            headerBackTitle: 'Volver',
+            headerBackTitle: 'Back',
           }}
         />
         <EditarAgendaNavigation.Screen
-          name="Step2"
+          name="Edit Schedule Step2"
           component={EditarAgendaStep2}
           options={{
-            title: 'Editar Agenda',
+            title: 'Edit Schedule',
             headerStyle: { backgroundColor: '#495867' },
-            headerBackTitle: 'Volver',
+            headerBackTitle: 'Back',
             headerTitleStyle: styles.h1,
           }}
         />
         <EditarAgendaNavigation.Screen
-          name="TurnosDelDia"
+          name="AppointmentsOfADay"
           component={TurnosDelDia}
           options={{
-            title: 'Turnos',
+            title: 'Appointments',
             headerStyle: { backgroundColor: '#495867' },
-            headerBackTitle: 'Volver',
+            headerBackTitle: 'Back',
             headerTitleStyle: styles.h1,
           }}
         />

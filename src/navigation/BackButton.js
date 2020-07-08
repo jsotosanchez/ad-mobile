@@ -6,7 +6,7 @@ export default function BackButton({ navigation }) {
   return (
     <View style={{ marginRight: 50, marginLeft: 10 }}>
       <TouchableOpacity onPress={() => navigation.pop()}>
-        <Text style={styles.backButton}> Volver</Text>
+        <Text style={styles.backButton}> Go Back</Text>
       </TouchableOpacity>
     </View>
   );

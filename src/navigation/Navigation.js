@@ -30,11 +30,11 @@ const LogInStackNavigation = createStackNavigator();
 export default function Navigation() {
   const context = useContext(SessionContext);
   const authorized = context.isAuthorized();
-  const isMedico = context.isMedico();
+  const isMedic = context.isMedico();
   return (
     <>
       <NavigationContainer theme={MyTheme}>
-        {authorized ? <AuthorizedContent isMedico={isMedico} /> : <UnauthorizedContent />}
+        {authorized ? <AuthorizedContent isMedic={isMedic} /> : <UnauthorizedContent />}
       </NavigationContainer>
     </>
   );
@@ -47,26 +47,26 @@ function UnauthorizedContent() {
         headerShown: false,
       }}
     >
-      <LogInStackNavigation.Screen name="Conectarse" component={SignIn} />
+      <LogInStackNavigation.Screen name="Log In" component={SignIn} />
     </LogInStackNavigation.Navigator>
   );
 }
 
-function AuthorizedContent({ isMedico }) {
+function AuthorizedContent({ isMedic }) {
   return (
-    <Drawer.Navigator initialRouteName="Mi Agenda">
-      {isMedico ? (
+    <Drawer.Navigator initialRouteName="My Schedule">
+      {isMedic ? (
         <>
-          <Drawer.Screen name="Mi Agenda" component={EditarAgenaStackNavigation} />
-          <Drawer.Screen name="Cargar Agenda" component={CargarAgenda} />
+          <Drawer.Screen name="My Schedule" component={EditarAgenaStackNavigation} />
+          <Drawer.Screen name="Set my schedule" component={CargarAgenda} />
         </>
       ) : (
         <></>
       )}
-      <Drawer.Screen name="Citas Medicas" component={Turnos} />
-      <Drawer.Screen name="Reservar Turno" component={ReservarTurnoStackNavigation} />
-      <Drawer.Screen name="Notificaciones" component={Notificaciones} />
-      <Drawer.Screen name="Salir" component={SignOut} />
+      <Drawer.Screen name="Schedule an appointment" component={ReservarTurnoStackNavigation} />
+      <Drawer.Screen name="My appointments" component={Turnos} />
+      <Drawer.Screen name="Notifications" component={Notificaciones} />
+      <Drawer.Screen name="Sign out" component={SignOut} />
     </Drawer.Navigator>
   );
 }
