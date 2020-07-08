@@ -7,10 +7,10 @@ import BurgerMenu from '../navigation/BurgerMenu';
 export default function SignOut({ navigation }) {
   const context = useContext(SessionContext);
   const unAuthorize = context.unAuthorize;
-  const isMedico = context.isMedico();
+  const isMedic = context.isMedico();
 
   const submit = () => {
-    isMedico ? navigation.navigate('Mi Agenda') : navigation.navigate('Citas Medicas');
+    isMedic ? navigation.navigate('Mi Agenda') : navigation.navigate('Citas Medicas');
     unAuthorize();
   };
 
@@ -18,12 +18,11 @@ export default function SignOut({ navigation }) {
     <>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Cerrar Sesión</Text>
       </View>
       <View style={styles.logOut}>
-        <Text style={styles.labelCentered}>Estas seguro que quieres salir?</Text>
+        <Text style={styles.labelCentered}>Are you sure?</Text>
         <TouchableOpacity style={styles.buttonLogOut} onPress={submit}>
-          <Text style={styles.buttonLogInText}>Salir</Text>
+          <Text style={styles.buttonLogInText}>Exit</Text>
         </TouchableOpacity>
       </View>
     </>

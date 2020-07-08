@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   header: {
     backgroundColor: grisAzul,
     paddingTop: 30,
-    paddingBottom: 5,
+    paddingBottom: 10,
     textAlign: 'center',
     flexDirection: 'row',
   },
