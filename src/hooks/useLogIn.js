@@ -9,13 +9,13 @@ export const useLogIn = () => {
   const authenticate = context.authenticate;
   const unAuthorize = context.unAuthorize;
 
-  const logIn = useCallback((documento, password) => {
-    fetchPost(loginUrl, { credentials: { usuario: documento.toLowerCase(), password } })
+  const logIn = useCallback((username, password) => {
+    fetchPost(loginUrl, { credentials: { usuario: username.toLowerCase(), password } })
       .then(({ usuario, id, roles, pagoAlDia }) => {
         authenticate({ usuario, id, roles, pagoAlDia, password });
       })
       .catch(() => {
-        Alert.alert('Algunos de los datos son incorrectos, por favor verifiquelos');
+        Alert.alert('Please verify your username and password');
         unAuthorize();
       });
   }, []);

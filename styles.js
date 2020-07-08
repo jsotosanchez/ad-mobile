@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     padding: 60,
-    paddingTop: 150,
+    paddingTop: 100,
     fontSize: 50,
     color: rojo,
     alignSelf: 'center',
@@ -81,8 +81,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     width: 300,
     height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: azulOscuro,
     marginBottom: 40,
     marginTop: 5,
     color: azulOscuro,
