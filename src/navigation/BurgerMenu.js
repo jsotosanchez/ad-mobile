@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 
 export default function BurgerMenu({ navigation }) {
   return (
-    <View style={{ marginRight: 50, marginLeft: 10 }}>
+    <View style={{ marginLeft: 10 }}>
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
         <View
           style={{

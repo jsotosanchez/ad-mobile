@@ -73,7 +73,7 @@ export default function MyAppointments({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>My appointments</Text>
+        <Text style={styles.headerText}>My appointments</Text>
       </View>
       <FlatList
         data={appointments}

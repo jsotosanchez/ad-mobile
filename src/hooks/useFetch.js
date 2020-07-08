@@ -25,31 +25,24 @@ function fetchData(url, options) {
     });
 }
 
-/**
- * @template T expected type
- * @param {string} url
- * @return [T] data
- */
 export const useGet = (url, refresh, options) => {
   const [data, setData] = useState([]);
-  const [status, setStatus] = useState('LOADING');
+  const [fetchStatus, setFetchStatus] = useState('LOADING');
 
   const context = useContext(SessionContext);
-  const unAuthorize = context.unAuthorize;
 
   useEffect(() => {
     const finish = (data) => {
       setData(data);
-      setStatus('DONE');
+      setFetchStatus('DONE');
     };
     const cancel = (error) => {
-      setStatus('ERROR');
-      // unAuthorize();
+      setFetchStatus('ERROR');
       if (error instanceof AuthenticationError) return error;
     };
     fetchData(url, options).then(finish, cancel);
     return () => {};
   }, [url, refresh, options]);
 
-  return { data, status };
+  return { data, fetchStatus };
 };

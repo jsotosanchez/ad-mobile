@@ -46,14 +46,14 @@ export default function ScheduleAnAppointment({ navigation }) {
       <View style={styles.container}>
         <View style={styles.header}>
           <BurgerMenu navigation={navigation} />
-          <Text style={styles.h1}>Schedule Appointment</Text>
+          <Text style={styles.headerText}>Schedule Appointment</Text>
         </View>
       </View>
     ) : (
       <View style={styles.container}>
         <View style={styles.header}>
           <BurgerMenu navigation={navigation} />
-          <Text style={{ ...styles.headerText, paddingTop: 10 }}>Schedule Appointment</Text>
+          <Text style={styles.headerText}>Schedule Appointment</Text>
         </View>
         <View style={styles.centered}>
           <Text style={styles.label}>Select a specialty</Text>
@@ -79,7 +79,7 @@ export default function ScheduleAnAppointment({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Schedule Appointment</Text>
+        <Text style={styles.headerText}>Schedule Appointment</Text>
       </View>
       <View style={styles.centered}>
         <Text style={styles.label}>It seems like you have debt. Please pay it continue using our service.</Text>

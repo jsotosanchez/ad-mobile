@@ -35,17 +35,13 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
   },
-  h1: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: blanco,
-    fontWeight: 'bold',
-  },
   headerText: {
     fontSize: 20,
     textAlign: 'center',
     color: blanco,
     fontWeight: 'bold',
+    paddingTop: 15,
+    paddingLeft: 30,
   },
   backButton: {
     fontSize: 15,

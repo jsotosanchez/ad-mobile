@@ -34,7 +34,7 @@ export default function Notifications({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Notifications</Text>
+        <Text style={styles.headerText}>Notifications</Text>
       </View>
       <FlatList
         data={notifications}

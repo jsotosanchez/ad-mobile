@@ -51,7 +51,7 @@ export default function EditMySchedule({ navigation }) {
     <>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={{ ...styles.headerText, paddingTop: 15, paddingLeft: 30 }}>My Schedule</Text>
+        <Text style={styles.headerText}>My Schedule</Text>
       </View>
       <ScrollView
         style={styles.container}

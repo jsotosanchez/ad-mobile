@@ -106,7 +106,7 @@ export default function SetMySchedule({ navigation }) {
     <>
       <View style={styles.header}>
         <BurgerMenu navigation={navigation} />
-        <Text style={styles.h1}>Set Schedule</Text>
+        <Text style={styles.headerText}>Set Schedule</Text>
       </View>
       <ScrollView
         style={styles.container}
