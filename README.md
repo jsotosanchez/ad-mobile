@@ -1,1 +1,3 @@
-testing email config
+School project.
+
+Mobile app made in React-Native. 
